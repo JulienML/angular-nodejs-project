@@ -69,7 +69,7 @@ Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
 
 
 // Synchronizing the database
-//sequelize.sync();
+sequelize.sync();
 
 // const populateDatabase = async () => {
 //   await Student.create({ name: 'John Doe' });
@@ -191,28 +191,5 @@ app.put('/students/:id', async (req: Request, res: Response) => {
 app.delete('/students/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   await Student.destroy({ where: { id } });
-  res.status(204).send();
-});
-
-// Subjects CRUD
-app.get('/subjects', async (req: Request, res: Response) => {
-  const subjects = await Subject.findAll();
-  res.json(subjects);
-});
-
-app.post('/subjects', async (req: Request, res: Response) => {
-  const subject = await Subject.create(req.body);
-  res.status(201).json(subject);
-});
-
-app.put('/subjects/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const subject = await Subject.update(req.body, { where: { id } });
-  res.json(subject);
-});
-
-app.delete('/subjects/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  await Subject.destroy({ where: { id } });
   res.status(204).send();
 });
