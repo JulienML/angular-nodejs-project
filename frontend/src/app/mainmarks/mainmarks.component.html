@@ -1,0 +1,11 @@
+<h1>WELCOME TO THE ADMINISTRATION PLATEFORM</h1>
+<p>Grid of the average marks of each student</p>
+<!-- mainmarks.component.html -->
+
+<ag-grid-angular
+  style="width: 100%; height: 400px;"
+  class="ag-theme-alpine"
+  [columnDefs]="[{ headerName: 'Nom', field: 'nom' }]"
+  [rowData]="[{ nom: 'Dupont' }, { nom: 'Martin' }]"
+  [pagination]="true">
+</ag-grid-angular>
