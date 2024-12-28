@@ -1,11 +1,22 @@
 <h1>WELCOME TO THE ADMINISTRATION PLATEFORM</h1>
 <p>Grid of the average marks of each student</p>
-<!-- mainmarks.component.html -->
+<div>
+  <h1>Liste des étudiants et leurs moyennes</h1>
+  <table border="1">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Moyenne</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of students">
+      <td>{{ student.id }}</td>
+      <td>{{ student.name }}</td>
+      <td>{{ student.average }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
-<ag-grid-angular
-  style="width: 100%; height: 400px;"
-  class="ag-theme-alpine"
-  [columnDefs]="[{ headerName: 'Nom', field: 'nom' }]"
-  [rowData]="[{ nom: 'Dupont' }, { nom: 'Martin' }]"
-  [pagination]="true">
-</ag-grid-angular>

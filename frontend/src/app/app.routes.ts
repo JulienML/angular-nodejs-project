@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
-import { MainmarksComponent } from './mainmarks/mainmarks.component';  // Importer le composant Mainmarks
+import { MainMarksComponent } from './mainmarks/mainmarks.component';
 
 export const routes: Routes = [
-  { path: 'mainmarks', component: MainmarksComponent },  // Ajouter la route vers MainmarksComponent
-  { path: '', redirectTo: '/mainmarks', pathMatch: 'full' }  // Définir la route par défaut
+  { path: '', component: MainMarksComponent }, // Home route
+  //{ path: 'grade-config', component: GradeConfigComponent },
 ];
-
