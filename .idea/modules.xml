@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/angular-nodejs-project-adrien.iml" filepath="$PROJECT_DIR$/.idea/angular-nodejs-project-adrien.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/angular-nodejs-project.iml" filepath="$PROJECT_DIR$/.idea/angular-nodejs-project.iml" />
     </modules>
   </component>
 </project>

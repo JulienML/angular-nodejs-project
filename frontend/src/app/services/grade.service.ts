@@ -45,4 +45,3 @@ export class GradeService {
     return this.http.delete(`${this.apiUrl}/marks/${id}`);
   }
 }
-
