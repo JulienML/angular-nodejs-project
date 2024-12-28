@@ -14,6 +14,7 @@ const sequelize = new Sequelize({
   username: 'postgres',
   password: 'mathieu',
   database: 'SchoolDb',
+  logging: false,
 })
 
 
@@ -73,7 +74,16 @@ Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
 //Data seed
 (async () => {
   try {
-    await sequelize.sync({ force: true }); //synchronization of the models
+    await sequelize
+      .sync({force:true})
+      .then(() => {
+        console.log('Database synced successfully !')
+      })
+      .catch((error) => {
+        console.error('Error syncing database:', error);
+      }); //synchronization of the models
+
+
     //faire une suppression marks puis les deux autres tables si on utilise la
     // Insertion of the students
     await Student.bulkCreate([
@@ -158,14 +168,12 @@ Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
     console.log('Data inserted successfully.');
   } catch (error) {
     console.error('Error inserting data:', error);
-  } finally {
-    await sequelize.close();
-  }
+  } 
 })();
 
 
 // Synchronizing the database
-sequelize.sync();
+//sequelize.sync();
 
 const initializeDatabase = async () => {
   try {
@@ -194,7 +202,7 @@ const jsDocOptions = {
   apis: ['./app.ts'],
 };
 
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(jsDocOptions)));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(jsDocOptions)));
 app.listen(3000, () => {
   console.log(`Server is running on http://localhost:3000`);
 });
@@ -319,7 +327,7 @@ app.get('/students/averages', async (req: Request, res: Response): Promise<void>
       };
     });
 
-    res.json(result.slice(0, 5)); // Retourner les 5 premiers étudiants
+    res.status(200).json(result); // Retourner les 5 premiers étudiants
   } catch (error) {
     console.error('Error fetching averages:', error);
     res.status(500).json({ error: 'An error occurred while fetching averages.' });
