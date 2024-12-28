@@ -1,3 +1,4 @@
+
 import express, { Request, Response } from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import * as swaggerUi from 'swagger-ui-express';
@@ -37,7 +38,7 @@ const Subject = sequelize.define('Subject', {
     type: DataTypes.STRING,
     allowNull: false,
   }
-})
+});
 
 const Mark = sequelize.define('Mark', {
   id_student: {
@@ -56,7 +57,7 @@ const Mark = sequelize.define('Mark', {
     type: DataTypes.INTEGER,
     defaultValue: 1
   }
-})
+});
 
 //Relationships
 Student.hasMany(Mark, { foreignKey: 'id_student' });
