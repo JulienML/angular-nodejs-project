@@ -1,3 +1,4 @@
+
 import express, { Request, Response } from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import * as swaggerUi from 'swagger-ui-express';
@@ -25,7 +26,7 @@ const Student = sequelize.define('Student', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-})
+});
 
 const Subject = sequelize.define('Subject', {
   id: {
@@ -36,8 +37,8 @@ const Subject = sequelize.define('Subject', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
-})
+  },
+});
 
 const Mark = sequelize.define('Mark', {
   id_student: {
@@ -54,6 +55,7 @@ const Mark = sequelize.define('Mark', {
   },
   coefficient: {
     type: DataTypes.INTEGER,
+
     defaultValue: 1
   }
 })
@@ -101,13 +103,52 @@ const jsDocOptions = {
       version: '1.0.0',
     },
   },
-  apis: ['app.ts'],
+  apis: ['./app.ts'],
 };
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(jsDocOptions)));
-
 app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
+  console.log(`Server is running on http://localhost:3000`);
+});
+
+//Api qui doit retourner l'id et noms des students ainsi que leur moyenne générale
+app.get('/students/averages', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const students = await Student.findAll();
+
+    if (!students || students.length === 0) {
+      res.status(404).json({ error: 'No students found.' });
+      return;
+    }
+
+    const marks = await Mark.findAll();
+
+    const result = students.map(student => {
+      const studentMarks = marks.filter(mark => mark.get('id_student') === student.get('id'));
+
+      const totalMarks = studentMarks.reduce(
+          (sum, mark) => sum + (mark.get('mark') as number) * (mark.get('coefficient') as number),
+          0
+      );
+      const totalCoefficients = studentMarks.reduce(
+          (sum, mark) => sum + (mark.get('coefficient') as number),
+          0
+      );
+
+      const average = totalCoefficients > 0 ? totalMarks / totalCoefficients : 0;
+
+      return {
+        id: student.get('id'),
+        name: student.get('name'),
+        average: parseFloat(average.toFixed(2)),
+      };
+    });
+
+    res.status(200).json(result); // Retourner les 5 premiers étudiants
+  } catch (error) {
+    console.error('Error fetching averages:', error);
+    res.status(500).json({ error: 'An error occurred while fetching averages.' });
+  }
 });
 
 // Students CRUD
@@ -120,7 +161,6 @@ app.get('/students', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'An error occurred while fetching students.' });
   }
 });
-
 
 app.post('/students', async (req: Request, res: Response) => {
   const student = await Student.create(req.body);
@@ -190,5 +230,3 @@ app.delete('/marks/:id', async (req: Request, res: Response) => {
   await Mark.destroy({ where: { id } });
   res.status(204).send();
 });
-
-
