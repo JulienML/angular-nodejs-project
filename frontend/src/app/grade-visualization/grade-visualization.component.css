@@ -1,0 +1,9 @@
+.highcharts-container {
+  width: 100% !important;
+  height: 400px !important; /* Fixe une hauteur explicite */
+}
+
+.highcharts-figure {
+  width: 100%;
+  height: 400px;
+}

@@ -1,0 +1,42 @@
+<div class="grade-form">
+    <h2>Manage Grades</h2>
+  
+    <!-- Add Grade -->
+    <h3>Add Grade</h3>
+    <form (ngSubmit)="addGrade()">
+      <select [(ngModel)]="newGrade.id_student" name="student" required>
+        <option *ngFor="let student of students" [value]="student.id">{{ student.name }}</option>
+      </select>
+      <select [(ngModel)]="newGrade.id_subject" name="subject" required>
+        <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
+      </select>
+      <input type="number" [(ngModel)]="newGrade.mark" name="mark" placeholder="Mark" min="0" max="20" required />
+      <input type="number" [(ngModel)]="newGrade.coefficient" name="coefficient" placeholder="Coefficient" min="1" />
+      <button type="submit">Add Grade</button>
+    </form>
+  
+    <!-- Add Student -->
+    <h3>Add Student</h3>
+    <form (ngSubmit)="addStudent()">
+      <input type="text" [(ngModel)]="newStudentName" name="studentName" placeholder="Student Name" required />
+      <button type="submit">Add Student</button>
+    </form>
+  
+    <!-- Add Subject -->
+    <h3>Add Subject</h3>
+    <form (ngSubmit)="addSubject()">
+      <input type="text" [(ngModel)]="newSubjectName" name="subjectName" placeholder="Subject Name" required />
+      <button type="submit">Add Subject</button>
+    </form>
+  
+    <!-- Grade List -->
+    <h3>Grade List</h3>
+    <ul>
+      <li *ngFor="let grade of grades">
+        Student {{ grade.Student.name }} - Subject {{ grade.Subject.name }}: {{ grade.mark }}
+        <button (click)="deleteGrade(grade.id)">Delete</button>
+        <button (click)="updateGrade(grade)">Update</button>
+      </li>
+    </ul>
+  </div>
+  
