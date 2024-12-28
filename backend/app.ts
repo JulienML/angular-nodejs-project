@@ -110,6 +110,59 @@ app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
 });
 
+// Subjects CRUD
+app.get('/subjects', async (req: Request, res: Response) => {
+  const subjects = await Subject.findAll();
+  res.json(subjects);
+});
+
+app.post('/subjects', async (req: Request, res: Response) => {
+  const subject = await Subject.create(req.body);
+  res.status(201).json(subject);
+});
+
+app.put('/subjects/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const subject = await Subject.update(req.body, { where: { id } });
+  res.json(subject);
+});
+
+app.delete('/subjects/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  await Subject.destroy({ where: { id } });
+  res.status(204).send();
+});
+
+// Marks CRUD
+app.get('/marks', async (req: Request, res: Response) => {
+  try {
+    const marks = await Mark.findAll({
+      include: [Student, Subject] // Inclut les relations nécessaires
+    });
+    res.json(marks);
+  } catch (error) {
+    console.error('Error fetching marks:', error);
+    res.status(500).json({ error: 'An error occurred while fetching marks.' });
+  }
+});
+
+app.post('/marks', async (req: Request, res: Response) => {
+  const mark = await Mark.create(req.body);
+  res.status(201).json(mark);
+});
+
+app.put('/marks/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const mark = await Mark.update(req.body, { where: { id } });
+  res.json(mark);
+});
+
+app.delete('/marks/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  await Mark.destroy({ where: { id } });
+  res.status(204).send();
+});
+
 // Students CRUD
 app.get('/students', async (req: Request, res: Response) => {
   try {
@@ -159,36 +212,5 @@ app.put('/subjects/:id', async (req: Request, res: Response) => {
 app.delete('/subjects/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   await Subject.destroy({ where: { id } });
-  res.status(204).send();
-});
-
-// Marks CRUD
-app.get('/marks', async (req: Request, res: Response) => {
-  try {
-    const marks = await Mark.findAll({
-      include: [Student, Subject] // Inclut les relations nécessaires
-    });
-    res.json(marks);
-  } catch (error) {
-    console.error('Error fetching marks:', error);
-    res.status(500).json({ error: 'An error occurred while fetching marks.' });
-  }
-});
-
-
-app.post('/marks', async (req: Request, res: Response) => {
-  const mark = await Mark.create(req.body);
-  res.status(201).json(mark);
-});
-
-app.put('/marks/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const mark = await Mark.update(req.body, { where: { id } });
-  res.json(mark);
-});
-
-app.delete('/marks/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  await Mark.destroy({ where: { id } });
   res.status(204).send();
 });
