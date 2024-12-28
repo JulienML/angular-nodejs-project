@@ -67,23 +67,6 @@ Mark.belongsTo(Student, { foreignKey: 'id_student' });
 Subject.hasMany(Mark, { foreignKey: 'id_subject' });
 Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
 
-
-//Relationships
-Student.hasMany(Mark, { foreignKey: 'id_student' });
-Mark.belongsTo(Student, { foreignKey: 'id_student' });
-
-Subject.hasMany(Mark, { foreignKey: 'id_subject' });
-Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
-
-
-//Relationships
-Student.hasMany(Mark, { foreignKey: 'id_student' });
-Mark.belongsTo(Student, { foreignKey: 'id_student' });
-
-Subject.hasMany(Mark, { foreignKey: 'id_subject' });
-Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
-
-
 // Synchronizing the database
 const syncDatabase = async () => {
   try {
@@ -143,11 +126,7 @@ const populateDatabase = async () => {
       { id_student: 3, id_subject: 2, mark: 15, coefficient: 3 },
       { id_student: 4, id_subject: 2, mark: 18, coefficient: 3 },
       { id_student: 5, id_subject: 2, mark: 16, coefficient: 3 },
-      
-      { id_student: 1, id_subject: 3, mark: 18, coefficient: 3 },
-      { id_student: 2, id_subject: 3, mark: 17, coefficient: 3 },
-      { id_student: 3, id_subject: 3, mark: 16, coefficient: 3 },
-      { id_student: 4, id_subject: 3, mark: 20, coefficient: 3 },
+        //first test, coefficient 3
       { id_student: 5, id_subject: 3, mark: 19, coefficient: 3 },
       { id_student: 1, id_subject: 3, mark: 16, coefficient: 2 },
       { id_student: 2, id_subject: 3, mark: 18, coefficient: 2 },
