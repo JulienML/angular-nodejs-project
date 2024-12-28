@@ -1,37 +1,129 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';  // Importer CommonModule pour les directives comme ngIf
-import { AgGridModule } from 'ag-grid-angular';  // Importer AgGridModule
-import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-import { ColDef, GridOptions } from 'ag-grid-community';  // Si nécessaire pour vos colonnes ou options de la grille
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MainMarksService } from '../Services/MainMarksServices';
+
+@Component({
+  selector: 'mainmarks',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './mainmarks.component.html',
+  styleUrl: './mainmarks.component.css'
+})
+export class MainMarksComponent implements OnInit {
+  students: { id: number; name: string; average: number }[] = [];
+
+  constructor(private mainmarksService: MainMarksService) {}
+
+  ngOnInit() {
+    this.mainmarksService.getStudents().subscribe((data: any[]) => {
+      this.students = data.map(student => ({
+        id: student.id,
+        name: student.name,
+        average: student.average
+      }));
+    });
+  }
+}
+
+/*
+import {Component, computed, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import {AgGridAngular} from 'ag-grid-angular'; // Angular Data Grid Component
+import {GridApi,GridReadyEvent,ColDef} from 'ag-grid-community';
+import {FormsModule} from '@angular/forms';
+
+export class FooModel {
+  id!: number;
+  name!: string;
+  average!: number;
+}
+
+class CityModel {
+}
 
 @Component({
   selector: 'app-mainmarks',
   standalone: true,
-  imports: [AgGridModule, CommonModule],
+  imports: [AgGridAngular, FormsModule],
+  templateUrl: './my.component.html',
+})
+export class MainMarksComponent implements OnInit {
+
+  private gridApi!: GridApi<CityModel>;
+
+  rows$ = signal(<FooModel[]>[]);
+
+
+  colDefs: ColDef<FooModel>[] = [
+    { headerName: "Id", minWidth: 500,
+      // field: "id",
+      valueGetter: p => p.data?.id,
+    },
+    { headerName: "Name", minWidth: 500,
+      // field: "name",
+      valueGetter: p => p.data?.name,
+    },
+    { headerName: "Average", minWidth: 500,
+      // field: "name",
+      valueGetter: p => p.data?.average,
+    }
+  ];
+
+  onGridReady(params: GridReadyEvent<CityModel>) {
+    this.gridApi = params.api;
+  }
+
+
+  onBtExport() {
+    this.gridApi.exportDataAsCsv();
+  }
+  constructor(private http: HttpClientModule) {}
+  ngOnInit(): void {
+    this.http.get<any[]>('http://localhost:3000/students/averages').subscribe(
+      (data:any):void => {
+        this.rowData = data;
+      },
+      (error:any):void => {
+        console.error('Error fetching student averages:', error);
+      }
+    );
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
+
+@Component({
+  selector: 'app-mainmarks',
+  standalone: true, // Composant autonome
+  imports: [AgGridModule],
   templateUrl: './mainmarks.component.html',
   styleUrls: ['./mainmarks.component.css']
 })
-export class MainmarksComponent implements OnInit {
-  // Définir les colonnes de la grille avec le type ColDef
+export class MainMarksComponent {
+  rowData: any[] = [];
   columnDefs = [
-    { headerName: "Last Name", field: "nom", sortable: true, filter: true },
-    { headerName: "First Name", field: "prenom", sortable: true, filter: true },
-    { headerName: "Date of Birth", field: "dob", sortable: true, filter: true },
-    { headerName: "Average Grade", field: "moyenne", sortable: true, filter: true }
+    { field: 'id', headerName: 'ID', sortable: true, filter: true },
+    { field: 'name', headerName: 'Name', sortable: true, filter: true },
+    { field: 'average', headerName: 'Average', sortable: true, filter: true }
   ];
+  defaultColDef = {
+    sortable: true,
+    filter: true,
+    resizable: true,
+    flex: 1,
+    minWidth: 100
+  };
 
-  // Données statiques (pour le test)
-  rowData = [
-    { nom: "Dupont", prenom: "Jean", dob: "01/01/2000", moyenne: 15.5 },
-    { nom: "Martin", prenom: "Sophie", dob: "12/03/1999", moyenne: 18.2 },
-    { nom: "Lemoine", prenom: "Paul", dob: "21/07/1998", moyenne: 14.0 },
-    { nom: "Durand", prenom: "Alice", dob: "03/10/2001", moyenne: 17.8 },
-    { nom: "Leroy", prenom: "Marie", dob: "15/08/1997", moyenne: 16.3 }
-  ];
+    constructor(private http: HttpClientModule) {}
 
 
-  ngOnInit(): void {
-    console.log("Columns:", this.columnDefs);
-    console.log("Row Data:", this.rowData);
-  }
+
+
 }
+*/
