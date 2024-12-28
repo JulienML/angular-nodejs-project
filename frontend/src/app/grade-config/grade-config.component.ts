@@ -31,7 +31,6 @@ export class GradeConfigComponent implements OnInit {
     this.gradeService.getSubjects().subscribe((data: any[]) => (this.subjects = data));
     this.gradeService.getMarks().subscribe((data: any[]) => (this.grades = data));
   }
-  
 
   // Add a new student
   addStudent() {

@@ -29,8 +29,8 @@ export class GradeService {
   }
 
   // Marks
-  getMarks(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/marks`);
+  getMarks(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/marks`);
   }
 
   addMark(mark: { id_student: number; id_subject: number; mark: number; coefficient?: number }): Observable<any> {

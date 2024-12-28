@@ -107,7 +107,7 @@ const jsDocOptions = {
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(jsDocOptions)));
 
 app.listen(3000, () => {
-  console.log(`Server is running on http://localhost:3000`);
+  console.log('Server is running on http://localhost:3000');
 });
 
 // Students CRUD
@@ -164,10 +164,16 @@ app.delete('/subjects/:id', async (req: Request, res: Response) => {
 
 // Marks CRUD
 app.get('/marks', async (req: Request, res: Response) => {
-  const marks = await Mark.findAll({ include: [Student, Subject] });
-  res.json(marks);
+  try {
+    const marks = await Mark.findAll({
+      include: [Student, Subject] // Inclut les relations nécessaires
+    });
+    res.json(marks);
+  } catch (error) {
+    console.error('Error fetching marks:', error);
+    res.status(500).json({ error: 'An error occurred while fetching marks.' });
+  }
 });
-
 app.post('/marks', async (req: Request, res: Response) => {
   const mark = await Mark.create(req.body);
   res.status(201).json(mark);
@@ -184,3 +190,5 @@ app.delete('/marks/:id', async (req: Request, res: Response) => {
   await Mark.destroy({ where: { id } });
   res.status(204).send();
 });
+
+
