@@ -10,7 +10,7 @@ const sequelize = new Sequelize({
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'azertyuiop',
+  password: 'admin',
   database: 'SchoolDb',
 })
 
@@ -174,8 +174,6 @@ app.get('/marks', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'An error occurred while fetching marks.' });
   }
 });
-
-
 app.post('/marks', async (req: Request, res: Response) => {
   const mark = await Mark.create(req.body);
   res.status(201).json(mark);
