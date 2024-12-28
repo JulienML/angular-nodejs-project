@@ -47,3 +47,4 @@ export class MainMarksComponent implements OnInit {
       });
   }
 }
+
