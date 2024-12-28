@@ -13,6 +13,7 @@ const sequelize = new Sequelize({
   username: 'SchoolDbUser',
   password: 'admin',
   database: 'SchoolDb',
+  logging: false,
 })
 
 // Model definition
@@ -68,7 +69,7 @@ Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
 
 
 // Synchronizing the database
-sequelize.sync();
+//sequelize.sync();
 
 // const populateDatabase = async () => {
 //   await Student.create({ name: 'John Doe' });
