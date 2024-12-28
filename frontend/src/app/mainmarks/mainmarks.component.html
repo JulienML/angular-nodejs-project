@@ -1,22 +1,13 @@
-<h1>WELCOME TO THE ADMINISTRATION PLATEFORM</h1>
-<p>Grid of the average marks of each student</p>
-<div>
-  <h1>Liste des étudiants et leurs moyennes</h1>
-  <table border="1">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nom</th>
-      <th>Moyenne</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let student of students">
-      <td>{{ student.id }}</td>
-      <td>{{ student.name }}</td>
-      <td>{{ student.average }}</td>
-    </tr>
-    </tbody>
-  </table>
-</div>
+<div class="container">
+  <h1>Welcome to the Administration Platform</h1>
+  <p>Grid of the average marks of each student</p>
 
+  <div class="grid-container">
+    <ag-grid-angular
+      class="ag-theme-alpine"
+      style="height: 175px; width: 80%;"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+    ></ag-grid-angular>
+  </div>
+</div>
