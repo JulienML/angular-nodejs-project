@@ -41,8 +41,7 @@ For features which represent categorical data (letters), for instance "Name", yo
 *See the following image as an example of filtering by Name by ascending order.*
 ![Home_screen1](./screens/Home_screen1.png)
 
-it is the same principle for descending order. 
-**Sorting cannot be done simultaneously with multiple features.**
+It is the same principle for descending order. **Sorting cannot be done simultaneously with multiple features.**
 
 
 ### Filtering
