@@ -1,7 +1,9 @@
 # Node & React Final Project
 Julien DE VOS, Adrien DE MAILLY NESLE, Thomas GOUTORBE, Mathieu COWAN
 
--- Explanation of the project --
+# Project Description
+
+The goal of this project is to create a full-stack application that allows users to manage student grades. The application consists of two main parts: a backend server built with Node.JS and Express, and a frontend client built with Angular.
 
 # Table of Contents
 
