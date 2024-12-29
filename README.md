@@ -19,7 +19,9 @@ The goal of this project is to create a full-stack application that allows users
 
 # Explanation of the web pages
 
-Each page is easily accessible from the navigation bar at the top of the page.
+When you arrive on the Home Page, you will see the navigation bar (black band) with "Home" and all of the other pages, you just need to click on it's name to go to the page you want to go to.
+
+Obviously, you automatically arrive on the Home page, but you can always click on "Home" when you are on another page to go back to it.
 
 ## Home Page
 
@@ -27,9 +29,7 @@ The home page shows all students in the database with their overall grade averag
 
 ![Home Page](./screens/home.png)
 
-When you arrive the Home Page, you will see the navigation bar (black band) with "Home" and all of the other pages, you just need to click on it's name to go to the page you want to go to.
 
-Obviously, you automatically arrive on the Home page, but you can always click on "Home" when you are on another page to go back to it.
 Here, you can see an ag-Grid displaying each student's ID, name, and overall average mark (calculated as the average of all their grades) from the database.
 When your cursor is on the grid you can always scroll to see all of the remaining rows.
 
