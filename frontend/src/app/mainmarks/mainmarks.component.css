@@ -1,43 +1,41 @@
-/* Styling of the container */
+/* container layout parameters */
 .container {
-  margin: 20px auto; /* Centers the box and gives space around it */
-  max-width: 1300px; /* Maximum supported width, adapted to the grid */
+  margin: 20px auto; /* centers the box and gives space around it */
+  max-width: 1300px; /* maximum supported width, adapted to the grid */
   text-align: center;
   font-family: Arial, sans-serif;
-  padding: 40px ; /* Spacing the containing */
-  border: 2px solid #ccc; /* Thick light grey bordure */
+  padding: 40px ; /* space inside of container around of content */
+  border: 2px solid #ccc; /* thick light grey border */
   border-radius: 15px; /* rounded corners of the box */
-  background-color: #f4f7fb; /* little bright background colordouce */
+  background-color: #f4f7fb; /* bright background color */
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* shadow of box */
 }
 
-/* Styling of the main title */
+/* Main Title layout parameters */
 .container h1 {
   color: #222; /* dark color */
-  font-size: 28px;
+  font-size: 28px; /* size of text */
   margin-bottom: 20px; /* spacing under the title */
   font-weight: bold;
 }
 
-/* Styling of subtitle */
+/* Subtitle layout parameters */
 .container p {
-  color: #666; /* brighter color than the main titleclair */
+  color: #666; /* brighter color than the main title */
   font-size: 18px; /* lower font size than the main title */
   margin-bottom: 30px; /* more space under the subtitle */
 }
 
-/* Styling of Grid container  */
+
 .grid-container {
   margin: 20px auto; /* space around the centered box */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px; /* Space around the grid */
+  display: flex; /* enabling of Flexbox for alignment and spacing */
+  justify-content: center;/* center the content horizontally */
+  align-items: center; /* center the content vertically */
+  padding: 20px; /* space inside of container around of content */
   width : 65%; /* managing the space given for the grid*/
-  max-width: 1400px;
-  background-color: #ffffff;
+  max-width: 1400px; /* container's maximum width */
+  background-color: #ffffff; /* background color is white */
   border-radius: 10px; /* rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
 }
-
-
