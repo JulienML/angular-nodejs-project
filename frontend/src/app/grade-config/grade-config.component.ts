@@ -23,11 +23,13 @@ export class GradeConfigComponent implements OnInit {
 
   constructor(private gradeService: GradeService) {}
 
+  // Call the loadData function to create the display of grades below the form
   ngOnInit() {
     this.loadData();
   }
 
   // Load data from the backend
+  // Using the grade.service.ts component we fetch every student, subjects and mark from the database
   loadData() {
     this.gradeService.getStudents().subscribe((data: any[]) => (this.students = data));
     this.gradeService.getSubjects().subscribe((data: any[]) => (this.subjects = data));
@@ -37,6 +39,8 @@ export class GradeConfigComponent implements OnInit {
   }
   
   // Add a new student
+  // We call the grade.service.ts file to add a new student in the database
+  // and then we load the data again to refresh the display below
   addStudent() {
     if (this.newStudentName.trim()) {
       this.gradeService.addStudent({ name: this.newStudentName }).subscribe(() => {
@@ -54,6 +58,8 @@ export class GradeConfigComponent implements OnInit {
   }
 
   // Add a new subject
+  // We call the grade.service.ts file to add a new subject in the database
+  // and then we load the data again to refresh the display below
   addSubject() {
     if (this.newSubjectName.trim()) {
       this.gradeService.addSubject({ name: this.newSubjectName }).subscribe(() => {
@@ -70,6 +76,8 @@ export class GradeConfigComponent implements OnInit {
   }
 
   // Add a new grade
+  // We call the grade.service.ts file to add a new mark in the database
+  // and then we load the data again to refresh the display below
   addGrade() {
     const { id_student, id_subject, mark, coefficient } = this.newGrade;
     if (id_student && id_subject && mark >= 0) {
@@ -91,6 +99,8 @@ export class GradeConfigComponent implements OnInit {
   }
 
   // Update an existing grade
+  // We call the grade.service.ts file to update and already existing grade from the database
+  // and the we load the data again to refresh the display below
   updateGrade(grade: any) {
     grade.isEditing = false;
     console.log(grade);
@@ -105,6 +115,8 @@ export class GradeConfigComponent implements OnInit {
   }
 
   // Delete a grade
+  // We call the grade.service.ts file to delete and already existing grade from the database
+  // and then we load the data again to refresh the display below
   deleteGrade(id: number) {
     this.gradeService.deleteMark(id).subscribe(() => {
       this.loadData(); // Refresh data
