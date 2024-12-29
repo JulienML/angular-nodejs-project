@@ -39,7 +39,7 @@ For instance, if you click a first time on the feature (title of column) "ID" or
 For features which are categorical data (letters), for instance Name, you can do the same thing, it will be by alphabetical order.
 See the following image  for example of filtering by ascending order, it is the same principle for descending order.
 
-![Home_screen1](./screens/home.png)
+![Home_screen1](./screens/Home_screen1.png)
 
 Sorting cannot be done simulanously with multiple features
 
@@ -51,22 +51,22 @@ With ag-grid it is also possible to filter the data on the grid. You do that by 
 You can filter by the following functions : equal, does not equal, greater than, greater than or equal to, less than, less than or equal to, between, blank, not blank.
 You choose one function to do your filtering then you enter your argument (example for ID : lower than 5)
 
-![Home_screen2](./screens/home.png)
+![Home_screen2](./screens/Home_screen2.png)
 
 once you enter your argument, you can choose or not to do a AND or a OR with another function (example for ID : lower than 5 OR equal 8 - aggrid_image4)
 
-![Home_screen3](./screens/home.png)
+![Home_screen3](./screens/Home_screen3.png)
 
 #### Filtering on categorical data (letters)
 You can filter by the following functions : Contains, Does not contain, Equals, Does not equal, Begins with, Ends with, Blank, Not Blank.
 You choose one function to do your filtering than then you enter your argument (example for Name : Contains o)
 
-![Home_screen4](./screens/home.png)
+![Home_screen4](./screens/Home_screen4.png)
 
 once you enter your argument, you can choose or not to do a AND or a OR with another function (example for Name : Contains o AND equals Begins with L)
 You can also do simultaneous filtering on multiple features, and you can also do one sorting simultaneously to your filtering
 
-![Home_screen5](./screens/home.png)
+![Home_screen5](./screens/Home_screen5.png)
 
 
 ## All Marks Page
