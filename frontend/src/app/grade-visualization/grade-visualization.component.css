@@ -1,9 +1,13 @@
 .highcharts-container {
-  width: 100% !important;
-  height: 400px !important; /* Fixe une hauteur explicite */
+  width: 100% ;
+  height: 400px ;
 }
 
 .highcharts-figure {
   width: 100%;
   height: 400px;
 }
+
+/* I tried to change the size of the visualisation because for a long time it wasn't working (the
+visualisation was empty)
+ */
