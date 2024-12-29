@@ -69,17 +69,92 @@ Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
 
 
 // Synchronizing the database
-sequelize.sync();
+const syncDatabase = async () => {
+  try {
+    await sequelize.sync({ force: true });
+    console.log('Database synchronized successfully.');
+  } catch (error) {
+    console.error('Error synchronizing the database:', error);
+  }
+};
 
-// const populateDatabase = async () => {
-//   await Student.create({ name: 'John Doe' });
-//   await Subject.create({ name: 'Mathematics' });
-//   await Mark.create({ id_student: 1, id_subject: 1, mark: 18 });
-// };
+//Data seed
+const populateDatabase = async () => {
+  try {
+    await Student.bulkCreate([
+      { name: 'Ali' },
+      { name: 'Adrien' },
+      { name: 'Julien' },
+      { name: 'Mathieu' },
+      { name: 'Thomas' },
+    ]);
 
-// populateDatabase();
+    await Subject.bulkCreate([
+      { name: 'Mathematics' },
+      { name: 'Physics' },
+      { name: 'Informatic' },
+    ]);
 
-const initializeDatabase = async () => {
+    await Mark.bulkCreate([
+      { id_student: 1, id_subject: 1, mark: 15, coefficient: 2 },
+      { id_student: 2, id_subject: 1, mark: 12, coefficient: 2 },
+      { id_student: 3, id_subject: 1, mark: 14, coefficient: 2 },
+      { id_student: 4, id_subject: 1, mark: 16, coefficient: 2 },
+      { id_student: 5, id_subject: 1, mark: 18, coefficient: 2 },
+      { id_student: 1, id_subject: 1, mark: 13, coefficient: 1 },
+      { id_student: 2, id_subject: 1, mark: 10, coefficient: 1 },
+      { id_student: 3, id_subject: 1, mark: 13, coefficient: 1 },
+      { id_student: 4, id_subject: 1, mark: 17, coefficient: 1 },
+      { id_student: 5, id_subject: 1, mark: 17, coefficient: 1 },
+      { id_student: 1, id_subject: 1, mark: 16, coefficient: 3 },
+      { id_student: 2, id_subject: 1, mark: 14, coefficient: 3 },
+      { id_student: 3, id_subject: 1, mark: 12, coefficient: 3 },
+      { id_student: 4, id_subject: 1, mark: 18, coefficient: 3 },
+      { id_student: 5, id_subject: 1, mark: 16, coefficient: 3 },
+
+      { id_student: 1, id_subject: 2, mark: 10, coefficient: 1 },
+      { id_student: 2, id_subject: 2, mark: 13, coefficient: 1 },
+      { id_student: 3, id_subject: 2, mark: 16, coefficient: 1 },
+      { id_student: 4, id_subject: 2, mark: 13, coefficient: 1 },
+      { id_student: 5, id_subject: 2, mark: 17, coefficient: 1 },
+      { id_student: 1, id_subject: 2, mark: 12, coefficient: 2 },
+      { id_student: 2, id_subject: 2, mark: 14, coefficient: 2 },
+      { id_student: 3, id_subject: 2, mark: 14, coefficient: 2 },
+      { id_student: 4, id_subject: 2, mark: 14, coefficient: 2 },
+      { id_student: 5, id_subject: 2, mark: 15, coefficient: 2 },
+      { id_student: 1, id_subject: 2, mark: 15, coefficient: 3 },
+      { id_student: 2, id_subject: 2, mark: 16, coefficient: 3 },
+      { id_student: 3, id_subject: 2, mark: 15, coefficient: 3 },
+      { id_student: 4, id_subject: 2, mark: 18, coefficient: 3 },
+      { id_student: 5, id_subject: 2, mark: 16, coefficient: 3 },
+      
+      { id_student: 1, id_subject: 3, mark: 18, coefficient: 3 },
+      { id_student: 2, id_subject: 3, mark: 17, coefficient: 3 },
+      { id_student: 3, id_subject: 3, mark: 16, coefficient: 3 },
+      { id_student: 4, id_subject: 3, mark: 20, coefficient: 3 },
+      { id_student: 5, id_subject: 3, mark: 19, coefficient: 3 },
+      { id_student: 1, id_subject: 3, mark: 16, coefficient: 2 },
+      { id_student: 2, id_subject: 3, mark: 18, coefficient: 2 },
+      { id_student: 3, id_subject: 3, mark: 14, coefficient: 2 },
+      { id_student: 4, id_subject: 3, mark: 18, coefficient: 2 },
+      { id_student: 5, id_subject: 3, mark: 18, coefficient: 2 },
+      { id_student: 1, id_subject: 3, mark: 14, coefficient: 1 },
+      { id_student: 2, id_subject: 3, mark: 19, coefficient: 1 },
+      { id_student: 3, id_subject: 3, mark: 15, coefficient: 1 },
+      { id_student: 4, id_subject: 3, mark: 17, coefficient: 1 },
+      { id_student: 5, id_subject: 3, mark: 20, coefficient: 1 },
+    ]);
+
+    console.log('Data inserted successfully.');
+  } catch (error) {
+    console.error('Error inserting data:', error);
+  }
+};
+
+const startServer = async () => {
+  await syncDatabase();
+  await populateDatabase();
+  sequelize.sync();
   try {
     await sequelize.authenticate();
     console.log('Connection to the PostgreSQL database has been established successfully.');
@@ -88,7 +163,7 @@ const initializeDatabase = async () => {
   }
 };
 
-initializeDatabase();
+startServer();
 
 const app = express();
 
