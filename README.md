@@ -37,9 +37,11 @@ When your cursor is on the grid you can always scroll to see all of the remainin
 With ag-grid it is possible to sort the data on the grid. You do that by clicking on the feature you wish to sort by. 
 For instance, if you click a first time on the feature (title of column) "ID" or any numerical feature, you will see an up-arrow next to the name of columnwhich means that you can see now the data ordered by ID in ascending order, if you click again you will see a down-arrow which means that you can see now the data ordered by ID in descending order. If you click a final time, the sorting will be back to the initial sorting of the data.
 For features which are categorical data (letters), for instance Name, you can do the same thing, it will be by alphabetical order.
-See the following image  for example of filtering by ascending order, it is the same principle for descending order
-Sorting cannot be done simulanously with multiple features
+See the following image  for example of filtering by ascending order, it is the same principle for descending order.
 
+//![Home_screen1](./screens/home.png)
+
+Sorting cannot be done simulanously with multiple features
 
 
 ### Filtering
@@ -47,22 +49,24 @@ With ag-grid it is also possible to filter the data on the grid. You do that by 
 
 #### Filtering on numerical data
 You can filter by the following functions : equal, does not equal, greater than, greater than or equal to, less than, less than or equal to, between, blank, not blank.
-You choose one function to do your filtering than then you enter your argument (example for ID : lower than 5)
+You choose one function to do your filtering then you enter your argument (example for ID : lower than 5)
 
-//![aggrid_image2](./screens/home.png)
+//![Home_screen2](./screens/home.png)
 
 once you enter your argument, you can choose or not to do a AND or a OR with another function (example for ID : lower than 5 OR equal 8 - aggrid_image4)
+
+//![Home_screen3](./screens/home.png)
 
 #### Filtering on categorical data (letters)
 You can filter by the following functions : Contains, Does not contain, Equals, Does not equal, Begins with, Ends with, Blank, Not Blank.
 You choose one function to do your filtering than then you enter your argument (example for Name : Contains o)
 
-//![aggrid_image3](./screens/home.png)
+//![Home_screen4](./screens/home.png)
 
 once you enter your argument, you can choose or not to do a AND or a OR with another function (example for Name : Contains o AND equals Begins with L)
 You can also do simultaneous filtering on multiple features, and you can also do one sorting simultaneously to your filtering
 
-//![aggrid_image4](./screens/home.png)
+//![Home_screen5](./screens/home.png)
 
 
 ## All Marks Page
