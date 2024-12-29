@@ -16,7 +16,9 @@ export class GradeConfigComponent implements OnInit {
   subjects: any[] = [];
   grades: any[] = [];
   newStudentName = '';
+  studentToRemove = 0;
   newSubjectName = '';
+  subjectToRemove = 0;
   newGrade = { id_student: 0, id_subject: 0, mark: 0, coefficient: 1 };
 
   constructor(private gradeService: GradeService) {}
@@ -44,6 +46,13 @@ export class GradeConfigComponent implements OnInit {
     }
   }
 
+  // Remove a student
+  removeStudent(id: number) {
+    this.gradeService.deleteStudent(id).subscribe(() => {
+      this.loadData(); // Refresh data
+    });
+  }
+
   // Add a new subject
   addSubject() {
     if (this.newSubjectName.trim()) {
@@ -52,6 +61,12 @@ export class GradeConfigComponent implements OnInit {
         this.newSubjectName = '';
       });
     }
+  }
+
+  removeSubject(id: number) {
+    this.gradeService.deleteSubject(id).subscribe(() => {
+      this.loadData(); // Refresh data
+    });
   }
 
   // Add a new grade
