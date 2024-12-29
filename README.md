@@ -57,7 +57,7 @@ You choose one function to do your filtering then you enter your argument
 Once you enter your argument, you can choose or not to do a AND or a OR with another function 
 
 *On this image you see the following filtering by ID : lower than 5 OR equal 8*
-![Home_screen3](./screens/Home_screen8.png)
+![Home_screen10](./screens/Home_screen10.png)
 
 
 *Exemple of console of filtering*
