@@ -27,9 +27,9 @@ The home page shows all students in the database with their overall grade averag
 
 ![Home Page](./screens/home.png)
 
-When you arrive the Home Page, you will see the navigation bar (black band) with "Home" and all of the other pages.
+When you arrive the Home Page, you will see the navigation bar (black band) with "Home" and all of the other pages, you just need to click on it's name to go to the page you want to go to.
 
-Obviously, you arrive automatically on the Home page, but you can always click on "Home" when you are on another page to go back to it.
+Obviously, you automatically arrive on the Home page, but you can always click on "Home" when you are on another page to go back to it.
 Here, you can see an ag-Grid displaying each student's ID, name, and overall average mark (calculated as the average of all their grades) from the database.
 When your cursor is on the grid you can always scroll to see all of the remaining rows.
 
@@ -42,11 +42,11 @@ For features which represent categorical data (letters), for instance "Name", yo
 ![Home_screen1](./screens/Home_screen1.png)
 
 it is the same principle for descending order. 
-**Sorting cannot be done simulanously with multiple features.**
+**Sorting cannot be done simultaneously with multiple features.**
 
 
 ### Filtering
-With 'ag-Grid' it is also possible to filter the data on the grid. You do that by clicking on the icon which is on the top left of the column which interests you (at the level of the title of the column), then you will have two sorts of filtering:
+With 'ag-Grid' it is also possible to filter the data on the grid. You do that by clicking on the icon which is on the top right of the column which interests you (at the level of the title of the column), then you will have two sorts of filtering:
 
 #### Filtering on numerical data
 You can filter by the following functions : equal, does not equal, greater than, greater than or equal to, less than, less than or equal to, between, blank, not blank.
@@ -59,6 +59,10 @@ Once you enter your argument, you can choose or not to do a AND or a OR with ano
 
 *On this image you see the following filtering by ID : lower than 5 OR equal 8*
 ![Home_screen3](./screens/Home_screen3.png)
+
+*Exemple of console of filtering*
+//![Home_screen6](./screens/Home_screen6.png)
+
 
 #### Filtering on categorical data (letters)
 You can filter by the following functions : Contains, Does not contain, Equals, Does not equal, Begins with, Ends with, Blank, Not Blank.
@@ -73,6 +77,10 @@ Once you enter your argument, you can choose or not to do a AND or a OR with ano
 *On this image you see the following filtering by Name : Contains o AND equals Begins with L*
 ![Home_screen5](./screens/Home_screen5.png)
 
+*To take out the filtering you just go back on the filtering icon you selected and you delete the argument you put for the filtering, and it will go back to normal*
+
+*Exemple of console of filtering*
+//![Home_screen7](./screens/Home_screen7.png)
 
 ## All Marks Page
 
