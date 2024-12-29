@@ -51,6 +51,8 @@ export class GradeConfigComponent implements OnInit {
   }
 
   // Remove a student
+  // We call the grade.service.ts file to delete a student from the database
+  // and then we load the data again to refresh the display below
   removeStudent(id: number) {
     this.gradeService.deleteStudent(id).subscribe(() => {
       this.loadData(); // Refresh data
@@ -69,6 +71,9 @@ export class GradeConfigComponent implements OnInit {
     }
   }
 
+  // Remove a subject
+  // We call the grade.service.ts file to delete a subject from the database
+  // and then we load the data again to refresh the display below
   removeSubject(id: number) {
     this.gradeService.deleteSubject(id).subscribe(() => {
       this.loadData(); // Refresh data
@@ -89,11 +94,13 @@ export class GradeConfigComponent implements OnInit {
   }
 
   // Edit a grade
+  // We set the isEditing property to true to allow the user to edit the grade (show the form)
   editGrade(grade: any) {
     grade.isEditing = true;
   }
 
   // Cancel editing a grade
+  // We set the isEditing property to false to prevent the user from editing the grade (hide the form)
   cancelEdit(grade: any) {
     grade.isEditing = false;
   }

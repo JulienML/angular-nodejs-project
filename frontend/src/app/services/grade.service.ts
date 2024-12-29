@@ -22,6 +22,7 @@ export class GradeService {
     return this.http.post(`${this.apiUrl}/students`, student);
   }
 
+  // API to delete an already existant student from the database
   deleteStudent(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/students/${id}`);
   }
@@ -37,6 +38,7 @@ export class GradeService {
     return this.http.post(`${this.apiUrl}/subjects`, subject);
   }
 
+  // API to delete an already existant subject from the database
   deleteSubject(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/subjects/${id}`);
   }

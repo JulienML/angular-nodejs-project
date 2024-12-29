@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import Highcharts from 'highcharts';
 import { GradeService } from '../services/grade.service';
 import { FormsModule } from '@angular/forms'; // We import all we need at first
@@ -7,17 +8,19 @@ import { FormsModule } from '@angular/forms'; // We import all we need at first
   selector: 'app-grade-visualization',
   templateUrl: './grade-visualization.component.html', // Link the HTML template
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   styleUrls: ['./grade-visualization.component.css'] // Link to the Style page
 })
 export class GradeVisualizationComponent implements OnInit {
   selectedStudent: string = ''; // Variable to store the selected student name
   marks: any[] = []; // Array to store marks
+  students: any[] = []; // Array to store students
 
   // We use GradeService to interact with the backend data
   constructor(private gradeService: GradeService) {}
 
   ngOnInit() {
+    this.gradeService.getStudents().subscribe((data: any[]) => (this.students = data));
     this.gradeService.getMarks().subscribe((marks: any[]) => {
       this.marks = marks; // Store the marks data
       this.loadCharts(marks);
