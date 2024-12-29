@@ -1,9 +1,9 @@
-
 import express, { Request, Response } from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import * as swaggerUi from 'swagger-ui-express';
 import { Sequelize, DataTypes } from 'sequelize';
 import cors from 'cors';
+import { populateTables } from './seed';
 
 // PostgreSQL database setup
 const sequelize = new Sequelize({
@@ -13,6 +13,7 @@ const sequelize = new Sequelize({
   username: 'postgres',
   password: 'mathieu',
   database: 'SchoolDb',
+  logging: false,
 })
 
 // Model definition
@@ -37,7 +38,7 @@ const Subject = sequelize.define('Subject', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-  },
+  }
 });
 
 const Mark = sequelize.define('Mark', {
@@ -58,7 +59,7 @@ const Mark = sequelize.define('Mark', {
 
     defaultValue: 1
   }
-})
+});
 
 //Relationships
 Student.hasMany(Mark, { foreignKey: 'id_student' });
@@ -66,7 +67,6 @@ Mark.belongsTo(Student, { foreignKey: 'id_student' });
 
 Subject.hasMany(Mark, { foreignKey: 'id_subject' });
 Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
-
 
 // Synchronizing the database
 const syncDatabase = async () => {
@@ -78,200 +78,9 @@ const syncDatabase = async () => {
   }
 };
 
-//Data seed
-const populateDatabase = async () => {
-  try {
-    await Student.bulkCreate([
-      { name: 'Ali' },
-      { name: 'Adrien' },
-      { name: 'Julien' },
-      { name: 'Mathieu' },
-      { name: 'Thomas' },
-      { name: 'Jérémy' },
-      { name: 'Sarah' },
-      { name: 'Maxence' },
-      { name: 'Antoine' },
-      { name: 'Louise' },
-      /*{ name: 'Valentin' },
-      { name: 'Thomas' },
-      { name: 'Laurent' },
-      { name: 'Adèle' },
-      { name: 'Charles' },*/
-    ]);
-
-
-    // Insertion of the subjects
-    await Subject.bulkCreate([
-      { name: 'Mathematics' },
-      { name: 'Physics' },
-      { name: 'Informatic' },
-    ]);
-
-    // Insertion of the marks
-    await Mark.bulkCreate([
-      // Mathematics
-      //first test : coefficient 2
-      //Example : Ali had a mark of 15/20 for his first mathematics test (coefficient 2)
-      { id_student: 1, id_subject: 1, mark: 18, coefficient: 2 },
-      { id_student: 2, id_subject: 1, mark: 12, coefficient: 2 },
-      { id_student: 3, id_subject: 1, mark: 14, coefficient: 2 },
-      { id_student: 4, id_subject: 1, mark: 16, coefficient: 2 },
-      { id_student: 5, id_subject: 1, mark: 17, coefficient: 2 },
-      { id_student: 6, id_subject: 1, mark: 10, coefficient: 2 },
-      { id_student: 7, id_subject: 1, mark: 13, coefficient: 2 },
-      { id_student: 8, id_subject: 1, mark: 15, coefficient: 2 },
-      { id_student: 9, id_subject: 1, mark: 17, coefficient: 2 },
-      { id_student: 10, id_subject: 1, mark: 11, coefficient: 2 },/*
-      { id_student: 11, id_subject: 1, mark: 20, coefficient: 2 },
-      { id_student: 12, id_subject: 1, mark: 10, coefficient: 2 },
-      { id_student: 13, id_subject: 1, mark: 19, coefficient: 2 },
-      { id_student: 14, id_subject: 1, mark: 20, coefficient: 2 },
-      { id_student: 15, id_subject: 1, mark: 14, coefficient: 2 },*/
-
-
-      //second test, coefficient 1
-      { id_student: 1, id_subject: 1, mark: 17, coefficient: 1},
-      { id_student: 2, id_subject: 1, mark: 12, coefficient: 1 },
-      { id_student: 3, id_subject: 1, mark: 14, coefficient: 1 },
-      { id_student: 4, id_subject: 1, mark: 16, coefficient: 1 },
-      { id_student: 5, id_subject: 1, mark: 15, coefficient: 1 },
-      { id_student: 6, id_subject: 1, mark: 17, coefficient: 1 },
-      { id_student: 7, id_subject: 1, mark: 13, coefficient: 1 },
-      { id_student: 8, id_subject: 1, mark: 17, coefficient: 1 },
-      { id_student: 9, id_subject: 1, mark: 17, coefficient: 1 },
-      { id_student: 10, id_subject: 1, mark: 12, coefficient: 1 },
-      /*{ id_student: 11, id_subject: 1, mark: 20, coefficient: 1 },
-      { id_student: 12, id_subject: 1, mark: 12, coefficient: 1 },
-      { id_student: 13, id_subject: 1, mark: 12, coefficient: 1 },
-      { id_student: 14, id_subject: 1, mark: 11, coefficient: 1 },
-      { id_student: 15, id_subject: 1, mark: 20, coefficient: 1 },*/
-
-      //third test, coefficient 3
-      { id_student: 1, id_subject: 1, mark: 19, coefficient: 3},
-      { id_student: 2, id_subject: 1, mark: 13, coefficient: 3 },
-      { id_student: 3, id_subject: 1, mark: 16, coefficient: 3 },
-      { id_student: 4, id_subject: 1, mark: 11, coefficient: 3 },
-      { id_student: 5, id_subject: 1, mark: 13, coefficient: 3 },
-      { id_student: 6, id_subject: 1, mark: 12, coefficient: 3 },
-      { id_student: 7, id_subject: 1, mark: 17, coefficient: 3 },
-      { id_student: 8, id_subject: 1, mark: 10, coefficient: 3 },
-      { id_student: 9, id_subject: 1, mark: 11, coefficient: 3 },
-      { id_student: 10, id_subject: 1, mark: 10, coefficient: 3 },/*
-      { id_student: 11, id_subject: 1, mark: 18, coefficient: 3 },
-      { id_student: 12, id_subject: 1, mark: 11, coefficient: 3 },
-      { id_student: 13, id_subject: 1, mark: 10, coefficient: 3 },
-      { id_student: 14, id_subject: 1, mark: 14, coefficient: 3 },
-      { id_student: 15, id_subject: 1, mark: 15, coefficient: 3 },*/
-
-      // Physics
-      //first test, coefficient 1
-      { id_student: 1, id_subject: 2, mark: 20, coefficient: 1},
-      { id_student: 2, id_subject: 2, mark: 12, coefficient: 1 },
-      { id_student: 3, id_subject: 2, mark: 15, coefficient: 1 },
-      { id_student: 4, id_subject: 2, mark: 17, coefficient: 1 },
-      { id_student: 5, id_subject: 2, mark: 16, coefficient: 1 },
-      { id_student: 6, id_subject: 2, mark: 18, coefficient: 1 },
-      { id_student: 7, id_subject: 2, mark: 12, coefficient: 1 },
-      { id_student: 8, id_subject: 2, mark: 14, coefficient: 1 },
-      { id_student: 9, id_subject: 2, mark: 16, coefficient: 1 },
-      { id_student: 10, id_subject: 2, mark: 14, coefficient: 1 },/*
-      { id_student: 11, id_subject: 2, mark: 19, coefficient: 1 },
-      { id_student: 12, id_subject: 2, mark: 13, coefficient: 1 },
-      { id_student: 13, id_subject: 2, mark: 11, coefficient: 1 },
-      { id_student: 14, id_subject: 2, mark: 10, coefficient: 1 },
-      { id_student: 15, id_subject: 2, mark: 18, coefficient: 1 },*/
-      //second test, coefficient 2
-      { id_student: 1, id_subject: 2, mark: 19, coefficient: 2},
-      { id_student: 2, id_subject: 2, mark: 12, coefficient: 2 },
-      { id_student: 3, id_subject: 2, mark: 13, coefficient: 2 },
-      { id_student: 4, id_subject: 2, mark: 15, coefficient: 2 },
-      { id_student: 5, id_subject: 2, mark: 16, coefficient: 2 },
-      { id_student: 6, id_subject: 2, mark: 16, coefficient: 2 },
-      { id_student: 7, id_subject: 2, mark: 12, coefficient: 2 },
-      { id_student: 8, id_subject: 2, mark: 12, coefficient: 2 },
-      { id_student: 9, id_subject: 2, mark: 13, coefficient: 2 },
-      { id_student: 10, id_subject: 2, mark: 12, coefficient: 2 },/*
-      { id_student: 11, id_subject: 2, mark: 14, coefficient: 2 },
-      { id_student: 12, id_subject: 2, mark: 11, coefficient: 2 },
-      { id_student: 13, id_subject: 2, mark: 10, coefficient: 2 },
-      { id_student: 14, id_subject: 2, mark: 8, coefficient: 2 },
-      { id_student: 15, id_subject: 2, mark: 17, coefficient: 2 },*/
-      //third test, coefficient 3
-      { id_student: 1, id_subject: 2, mark: 18, coefficient: 3},
-      { id_student: 2, id_subject: 2, mark: 10, coefficient: 3 },
-      { id_student: 3, id_subject: 2, mark: 11, coefficient: 3 },
-      { id_student: 4, id_subject: 2, mark: 12, coefficient: 3 },
-      { id_student: 5, id_subject: 2, mark: 14, coefficient: 3 },
-      { id_student: 6, id_subject: 2, mark: 12, coefficient: 3 },
-      { id_student: 7, id_subject: 2, mark: 9, coefficient: 3 },
-      { id_student: 8, id_subject: 2, mark: 11, coefficient: 3 },
-      { id_student: 9, id_subject: 2, mark: 12, coefficient: 3 },
-      { id_student: 10, id_subject: 2, mark: 10, coefficient: 3 },/*
-      { id_student: 11, id_subject: 2, mark: 12, coefficient: 3 },
-      { id_student: 12, id_subject: 2, mark: 10, coefficient: 3 },
-      { id_student: 13, id_subject: 2, mark: 10, coefficient: 3 },
-      { id_student: 14, id_subject: 2, mark: 10, coefficient: 3 },
-      { id_student: 15, id_subject: 2, mark: 16, coefficient: 3 },*/
-      // Informatic
-      //first test, coefficient 3
-      { id_student: 1, id_subject: 3, mark: 18, coefficient: 3},
-      { id_student: 2, id_subject: 3, mark: 12, coefficient: 3 },
-      { id_student: 3, id_subject: 3, mark: 17, coefficient: 3 },
-      { id_student: 4, id_subject: 3, mark: 16, coefficient: 3 },
-      { id_student: 5, id_subject: 3, mark: 15, coefficient: 3 },
-      { id_student: 6, id_subject: 3, mark: 18, coefficient: 3 },
-      { id_student: 7, id_subject: 3, mark: 16, coefficient: 3 },
-      { id_student: 8, id_subject: 3, mark: 17, coefficient: 3 },
-      { id_student: 9, id_subject: 3, mark: 20, coefficient: 3 },
-      { id_student: 10, id_subject: 3, mark: 13, coefficient: 3 },/*
-      { id_student: 11, id_subject: 3, mark: 14, coefficient: 3 },
-      { id_student: 12, id_subject: 3, mark: 16, coefficient: 3 },
-      { id_student: 13, id_subject: 3, mark: 18, coefficient: 3 },
-      { id_student: 14, id_subject: 3, mark: 17, coefficient: 3 },
-      { id_student: 15, id_subject: 3, mark: 20, coefficient: 3 },*/
-      //second test, coefficient 2
-      { id_student: 1, id_subject: 3, mark: 19, coefficient: 2},
-      { id_student: 2, id_subject: 3, mark: 14, coefficient: 2 },
-      { id_student: 3, id_subject: 3, mark: 16, coefficient: 2 },
-      { id_student: 4, id_subject: 3, mark: 20, coefficient: 2 },
-      { id_student: 5, id_subject: 3, mark: 14, coefficient: 2 },
-      { id_student: 6, id_subject: 3, mark: 15, coefficient: 2 },
-      { id_student: 7, id_subject: 3, mark: 19, coefficient: 2 },
-      { id_student: 8, id_subject: 3, mark: 20, coefficient: 2 },
-      { id_student: 9, id_subject: 3, mark: 20, coefficient: 2 },
-      { id_student: 10, id_subject: 3, mark: 12, coefficient: 2 },/*
-      { id_student: 11, id_subject: 3, mark: 14, coefficient: 2 },
-      { id_student: 12, id_subject: 3, mark: 16, coefficient: 2 },
-      { id_student: 13, id_subject: 3, mark: 18, coefficient: 2 },
-      { id_student: 14, id_subject: 3, mark: 18, coefficient: 2 },
-      { id_student: 15, id_subject: 3, mark: 19, coefficient: 2 },*/
-      //third test, coefficient 1
-      { id_student: 1, id_subject: 3, mark: 20, coefficient: 1},
-      { id_student: 2, id_subject: 3, mark: 11, coefficient: 1 },
-      { id_student: 3, id_subject: 3, mark: 15, coefficient: 1 },
-      { id_student: 4, id_subject: 3, mark: 17, coefficient: 1 },
-      { id_student: 5, id_subject: 3, mark: 15, coefficient: 1 },
-      { id_student: 6, id_subject: 3, mark: 17, coefficient: 1 },
-      { id_student: 7, id_subject: 3, mark: 20, coefficient: 1 },
-      { id_student: 8, id_subject: 3, mark: 15, coefficient: 1 },
-      { id_student: 9, id_subject: 3, mark: 14, coefficient: 1 },
-      { id_student: 10, id_subject: 3, mark: 13, coefficient: 1 }/*,
-      { id_student: 11, id_subject: 3, mark: 17, coefficient: 1 },
-      { id_student: 12, id_subject: 3, mark: 18, coefficient: 1 },
-      { id_student: 13, id_subject: 3, mark: 16, coefficient: 1 },
-      { id_student: 14, id_subject: 3, mark: 19, coefficient: 1 },
-      { id_student: 15, id_subject: 3, mark: 20, coefficient: 1 },*/
-    ]);
-
-    console.log('Data inserted successfully.');
-  } catch (error) {
-    console.error('Error inserting data:', error);
-  }
-};
-
 const startServer = async () => {
   await syncDatabase();
-  await populateDatabase();
+  await populateTables(Student, Subject, Mark);
   sequelize.sync();
   try {
     await sequelize.authenticate();
@@ -295,61 +104,200 @@ const jsDocOptions = {
       title: 'Node.js with TypeScript API',
       version: '1.0.0',
     },
+    components: {
+      schemas: {
+        Student: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer',
+              format: 'int64',
+            },
+            name: {
+              type: 'string',
+            },
+          },
+        },
+        StudentNoId: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+            },
+          },
+        },
+        StudentWithAverage: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer',
+              format: 'int64',
+            },
+            name: {
+              type: 'string',
+            },
+            average: {
+              type: 'number',
+              format: 'float',
+            },
+          },
+        },
+        Subject: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'integer',
+              format: 'int64',
+            },
+            name: {
+              type: 'string',
+            },
+          },
+        },
+        SubjectNoId: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+            },
+          },
+        },
+        Mark: {
+          type: 'object',
+          properties: {
+            id_student: {
+              type: 'integer',
+              format: 'int64',
+            },
+            id_subject: {
+              type: 'integer',
+              format: 'int64',
+            },
+            mark: {
+              type: 'integer',
+              format: 'int64',
+            },
+            coefficient: {
+              type: 'integer',
+              format: 'int64',
+            },
+          },
+        },
+        MarkNoIds: {
+          type: 'object',
+          properties: {
+            mark: {
+              type: 'integer',
+              format: 'int64',
+            },
+            coefficient: {
+              type: 'integer',
+              format: 'int64',
+            },
+          },
+        },
+      },
+    },
   },
-  apis: ['./app.ts'],
+  apis: ['app.ts'],
 };
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(jsDocOptions)));
+
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
-});
-
-// Students CRUD
-app.get('/students', async (req: Request, res: Response) => {
-  try {
-    const students = await Student.findAll(); // Récupère tous les étudiants
-    res.json(students); // Retourne les données en format JSON
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'An error occurred while fetching students.' });
-  }
-});
-
-
-app.post('/students', async (req: Request, res: Response) => {
-  const student = await Student.create(req.body);
-  res.status(201).json(student);
-});
-
-app.put('/students/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const student = await Student.update(req.body, { where: { id } });
-  res.json(student);
-});
-
-app.delete('/students/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  await Student.destroy({ where: { id } });
-  res.status(204).send();
+  console.log('API documentation available at http://localhost:3000/docs');
 });
 
 // Subjects CRUD
+
+/**
+ * @openapi
+ * /subjects:
+ *  get:
+ *    description: Get all subjects
+ *    responses:
+ *      200:
+ *        description: A JSON array of all subjects with their IDs and names
+ *        schema:
+ *          type: array
+ *          items:
+ *            $ref: '#/components/schemas/Subject'
+ */
 app.get('/subjects', async (req: Request, res: Response) => {
   const subjects = await Subject.findAll();
   res.json(subjects);
 });
 
+/**
+ * @openapi
+ * /subjects:
+ *  post:
+ *    description: Create a new subject
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/SubjectNoId'
+ *    responses:
+ *      201:
+ *        description: The created subject
+ *        schema:
+ *          $ref: '#/components/schemas/Subject'
+ */
 app.post('/subjects', async (req: Request, res: Response) => {
   const subject = await Subject.create(req.body);
   res.status(201).json(subject);
 });
 
+/**
+ * @openapi
+ * /subjects/{id}:
+ *  put:
+ *    description: Update an existing subject
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        description: The ID of the subject to update
+ *        schema:
+ *          type: integer
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/SubjectNoId'
+ *    responses:
+ *      200:
+ *        description: The modified subject
+ *        schema:
+ *          $ref: '#/components/schemas/Subject'
+ */
 app.put('/subjects/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const subject = await Subject.update(req.body, { where: { id } });
   res.json(subject);
 });
 
+
+/**
+ * @openapi
+ * /subjects/{id}:
+ *  delete:
+ *    description: Delete an existing subject
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        description: The ID of the subject to delete
+ *        schema:
+ *          type: integer
+ *    responses:
+ *      204:
+ *        description: The subject was deleted successfully
+ */
 app.delete('/subjects/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   await Subject.destroy({ where: { id } });
@@ -357,6 +305,22 @@ app.delete('/subjects/:id', async (req: Request, res: Response) => {
 });
 
 // Marks CRUD
+
+/**
+ * @openapi
+ * /marks:
+ *  get:
+ *    description: Get all marks
+ *    responses:
+ *      200:
+ *        description: A JSON array of all marks with their IDs, value and coefficient
+ *        schema:
+ *          type: array
+ *          items:
+ *            $ref: '#/components/schemas/Mark'
+ *      500:
+ *        description: An error occurred while fetching marks
+ */
 app.get('/marks', async (req: Request, res: Response) => {
   try {
     const marks = await Mark.findAll({
@@ -370,24 +334,192 @@ app.get('/marks', async (req: Request, res: Response) => {
 });
 
 
+/**
+ * @openapi
+ * /marks:
+ *  post:
+ *    description: Create a new mark
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/MarkNoIds'
+ *    responses:
+ *      200:
+ *        description: The created mark
+ *        schema:
+ *          $ref: '#/components/schemas/Mark'
+ */
 app.post('/marks', async (req: Request, res: Response) => {
   const mark = await Mark.create(req.body);
   res.status(201).json(mark);
 });
 
+/**
+ * @openapi
+ * /marks/{id}:
+ *  put:
+ *    description: Update an existing mark
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        description: The ID of the mark to update
+ *        schema:
+ *          type: integer
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/MarkNoIds'
+ *    responses:
+ *      200:
+ *        description: The modified mark
+ *        schema:
+ *          $ref: '#/components/schemas/Mark'
+ */
 app.put('/marks/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const mark = await Mark.update(req.body, { where: { id } });
   res.json(mark);
 });
 
+/**
+ * @openapi
+ * /marks/{id}:
+ *  delete:
+ *    description: Delete an existing mark
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        description: The ID of the mark to delete
+ *        schema:
+ *          type: integer
+ *    responses:
+ *      204:
+ *        description: The mark was deleted successfully
+ */
 app.delete('/marks/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   await Mark.destroy({ where: { id } });
   res.status(204).send();
 });
 
-//Api qui doit retourner l'id et noms des students ainsi que leur moyenne générale
+// Students CRUD
+
+/**
+ * @openapi
+ * /students:
+ *  get:
+ *    description: Get all students
+ *    responses:
+ *      200:
+ *        description: A JSON array of all students with their IDs and names
+ *        schema:
+ *          type: array
+ *          items:
+ *            $ref: '#/components/schemas/Student'
+ */
+app.get('/students', async (req: Request, res: Response) => {
+  try {
+    const students = await Student.findAll(); // Récupère tous les étudiants
+    res.json(students); // Retourne les données en format JSON
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while fetching students.' });
+  }
+});
+
+/**
+ * @openapi
+ * /students:
+ *  post:
+ *    description: Create a new student
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/StudentNoId'
+ *    responses:
+ *      201:
+ *        description: The created student
+ *        schema:
+ *          $ref: '#/components/schemas/Student'
+ */
+app.post('/students', async (req: Request, res: Response) => {
+  const student = await Student.create(req.body);
+  res.status(201).json(student);
+});
+
+/**
+ * @openapi
+ * /students/{id}:
+ *  put:
+ *    description: Update an existing student
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        description: The ID of the student to update
+ *        schema:
+ *          type: integer
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/StudentNoId'
+ *    responses:
+ *      200:
+ *        description: The modified student
+ *        schema:
+ *          $ref: '#/components/schemas/Student'
+ */
+app.put('/students/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const student = await Student.update(req.body, { where: { id } });
+  res.json(student);
+});
+
+/**
+ * @openapi
+ * /students/{id}:
+ *  delete:
+ *    description: Delete an existing student
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        description: The ID of the student to delete
+ *        schema:
+ *          type: integer
+ *    responses:
+ *      204:
+ *        description: The student was deleted successfully
+ */
+app.delete('/students/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  await Student.destroy({ where: { id } });
+  res.status(204).send();
+});
+
+/**
+ * @openapi
+ * /students/averages:
+ *  get:
+ *    description: Get the average marks of all students
+ *    responses:
+ *      200:
+ *        description: A JSON array of all students with their IDs, names and average marks
+ *        schema:
+ *          type: array
+ *          items:
+ *            $ref: '#/components/schemas/StudentWithAverage'
+ */
 app.get('/students/averages', async (req: Request, res: Response): Promise<void> => {
   try {
     const students = await Student.findAll();
@@ -425,84 +557,4 @@ app.get('/students/averages', async (req: Request, res: Response): Promise<void>
     console.error('Error fetching averages:', error);
     res.status(500).json({ error: 'An error occurred while fetching averages.' });
   }
-});
-
-// Students CRUD
-app.get('/students', async (req: Request, res: Response) => {
-  try {
-    const students = await Student.findAll(); // Récupère tous les étudiants
-    res.json(students); // Retourne les données en format JSON
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'An error occurred while fetching students.' });
-  }
-});
-
-app.post('/students', async (req: Request, res: Response) => {
-  const student = await Student.create(req.body);
-  res.status(201).json(student);
-});
-
-app.put('/students/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const student = await Student.update(req.body, { where: { id } });
-  res.json(student);
-});
-
-app.delete('/students/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  await Student.destroy({ where: { id } });
-  res.status(204).send();
-});
-
-// Subjects CRUD
-app.get('/subjects', async (req: Request, res: Response) => {
-  const subjects = await Subject.findAll();
-  res.json(subjects);
-});
-
-app.post('/subjects', async (req: Request, res: Response) => {
-  const subject = await Subject.create(req.body);
-  res.status(201).json(subject);
-});
-
-app.put('/subjects/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const subject = await Subject.update(req.body, { where: { id } });
-  res.json(subject);
-});
-
-app.delete('/subjects/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  await Subject.destroy({ where: { id } });
-  res.status(204).send();
-});
-
-// Marks CRUD
-app.get('/marks', async (req: Request, res: Response) => {
-  try {
-    const marks = await Mark.findAll({
-      include: [Student, Subject] // Inclut les relations nécessaires
-    });
-    res.json(marks);
-  } catch (error) {
-    console.error('Error fetching marks:', error);
-    res.status(500).json({ error: 'An error occurred while fetching marks.' });
-  }
-});
-app.post('/marks', async (req: Request, res: Response) => {
-  const mark = await Mark.create(req.body);
-  res.status(201).json(mark);
-});
-
-app.put('/marks/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const mark = await Mark.update(req.body, { where: { id } });
-  res.json(mark);
-});
-
-app.delete('/marks/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  await Mark.destroy({ where: { id } });
-  res.status(204).send();
 });

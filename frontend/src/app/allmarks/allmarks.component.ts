@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AllMarksService } from '../Services/AllMarksService';
+import { AllMarksService } from '../services/AllMarksService';
 import { AgGridModule } from 'ag-grid-angular';
 import { ColDef } from 'ag-grid-community';
 import { catchError, of } from 'rxjs';
@@ -12,7 +12,6 @@ ModuleRegistry.registerModules([AllCommunityModule]);
   templateUrl: './allmarks.component.html',
   styleUrls: ['./allmarks.component.css'],
 })
-
 
 export class AllMarksComponent implements OnInit {
   rowData: any[] = []; // we will fetch the data of the API to fill rowData

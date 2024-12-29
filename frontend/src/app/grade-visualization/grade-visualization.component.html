@@ -1,9 +1,17 @@
+<!-- We just call the 3 visualisations with HighCharts here -->
 <div id="chart-container-students" style="width: 100%; height: 400px;"></div>
 <div id="chart-container-subjects" style="width: 100%; height: 400px;"></div>
 
-<div class="indented-section">
-  <label for="student-name">Enter Student Name:</label>
-  <input id="student-name" type="text" [(ngModel)]="selectedStudent" placeholder="Student Name" />
-  <button (click)="loadStudentChart()">Show Grades</button>
+<div class=" indented-section"> <!-- we put this to indent a little our text zone to make it look better-->
+  <form (ngSubmit)="loadStudentChart()">
+    <label for="student">Enter Student Name:</label>
+    <select id="student" [(ngModel)]="selectedStudent" name="student" placeholder="Student Name" required>
+      <option *ngFor="let student of students" [value]="student.name">{{ student.name }}</option>
+    </select>
+    <button type="submit">Show Grades</button>
+  </form>
 </div>
 <div id="chart-container-student-grades" style="width: 100%; height: 400px;"></div>
+
+<!-- We chose which charts to call and the size/style of those.
+We also created a text zone where we can insert a name and then call the visualisation according to the name -->

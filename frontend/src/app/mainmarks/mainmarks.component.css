@@ -26,7 +26,6 @@
   margin-bottom: 30px; /* more space under the subtitle */
 }
 
-
 .grid-container {
   margin: 20px auto; /* space around the centered box */
   display: flex; /* enabling of Flexbox for alignment and spacing */
