@@ -10,8 +10,8 @@ const sequelize = new Sequelize({
   dialect: 'postgres',
   host: 'localhost',
   port: 5432,
-  username: 'postgres',
-  password: 'mathieu',
+  username: 'SchoolDbUser',
+  password: 'admin',
   database: 'SchoolDb',
   logging: false,
 })

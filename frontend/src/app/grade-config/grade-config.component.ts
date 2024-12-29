@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GradeService } from '../Services/grade.service';
+import { GradeService } from '../services/grade.service';
 
 @Component({
   selector: 'app-grade-config',
