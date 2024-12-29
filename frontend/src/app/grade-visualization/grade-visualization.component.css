@@ -8,6 +8,7 @@
   height: 400px;
 }
 
+.indented-section{margin-left: 40px;} /* Here we adjust the indentation for our visualisation
 /* I tried to change the size of the visualisation because for a long time it wasn't working (the
 visualisation was empty)
  */
