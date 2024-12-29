@@ -3,6 +3,7 @@
   
     <!-- Add Grade -->
     <h3>Add Grade</h3>
+    <!-- Creation of a form that requires a student from the existing list, a subject from the existing list, a mark between 0 and 20 and a coefficient of at least 1-->
     <form (ngSubmit)="addGrade()">
       <select [(ngModel)]="newGrade.id_student" name="student" required>
         <option *ngFor="let student of students" [value]="student.id">{{ student.name }}</option>
@@ -17,6 +18,7 @@
   
     <!-- Add Student -->
     <h3>Add Student</h3>
+    <!-- Creation of a form to add a new student to the database -->
     <form (ngSubmit)="addStudent()">
       <input type="text" [(ngModel)]="newStudentName" name="studentName" placeholder="Student Name" required />
       <button type="submit">Add Student</button>
@@ -24,6 +26,7 @@
   
     <!-- Add Subject -->
     <h3>Add Subject</h3>
+     <!-- Creation of a form to add a new subject to the database -->
     <form (ngSubmit)="addSubject()">
       <input type="text" [(ngModel)]="newSubjectName" name="subjectName" placeholder="Subject Name" required />
       <button type="submit">Add Subject</button>
