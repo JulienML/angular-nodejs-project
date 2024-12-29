@@ -61,7 +61,7 @@ Once you enter your argument, you can choose or not to do a AND or a OR with ano
 ![Home_screen3](./screens/Home_screen3.png)
 
 *Exemple of console of filtering*
-//![Home_screen6](./screens/Home_screen6.png)
+![Home_screen6](./screens/Home_screen6.png)
 
 
 #### Filtering on categorical data (letters)
@@ -80,7 +80,7 @@ Once you enter your argument, you can choose or not to do a AND or a OR with ano
 *To take out the filtering you just go back on the filtering icon you selected and you delete the argument you put for the filtering, and it will go back to normal*
 
 *Exemple of console of filtering*
-//![Home_screen7](./screens/Home_screen7.png)
+![Home_screen7](./screens/Home_screen7.png)
 
 ## All Marks Page
 
