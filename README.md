@@ -73,6 +73,7 @@ You choose one function to do your filtering than then you enter your argument
 ![Home_screen4](./screens/Home_screen4.png)
 
 Once you enter your argument, you can choose or not to do a AND or a OR with another function
+
 *You can also do simultaneous filtering on multiple features, and you can also do one sorting simultaneously to your filtering*
 
 *On this image you see the following filtering by Name : Contains o AND equals Begins with L*
