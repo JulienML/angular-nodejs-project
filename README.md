@@ -93,12 +93,14 @@ npm install
 
 ## Create the database
 
-In order to run the project, you need to create a PostgreSQL database. To do so, start by creating a user on pgAdming with the following credentials:
+In order to run the project, you need to create a PostgreSQL database. To do so, start by creating a user on pgAdmin with the following credentials:
 
 - username: `SchoolDbUser`
 - password: `admin`
 
-Then, create a database named `SchoolDb` and grant all privileges to the user `SchoolDbUser`.
+Make sure that the option `Can login?` is enabled.
+
+Then, create a database named `SchoolDb` owned by `SchoolDbUser`.
 
 The database will be automatically populated with some sample data when you run the server.
 
