@@ -78,12 +78,13 @@ Once you enter your argument, you can choose or not to do a AND or a OR with ano
 *On this image you see the following filtering by Name : Contains o AND equals Begins with L*
 ![Home_screen5](./screens/Home_screen5.png)
 
-*To take out the filtering you just go back on the filtering icon you selected and you delete the argument you put for the filtering, and it will go back to normal*
-
 
 *Exemple of console of filtering*
 
 ![Home_screen7](./screens/Home_screen7.png)
+
+*Note : To take out the filtering you just go back on the filtering icon you selected and you delete the argument you put for the filtering, and it will go back to normal*
+
 
 ## All Marks Page
 
