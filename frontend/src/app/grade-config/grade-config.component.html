@@ -1,45 +1,105 @@
 <div class="grade-form">
-    <h2>Manage Grades</h2>
-  
-    <!-- Add Grade -->
-    <h3>Add Grade</h3>
-    <!-- Creation of a form that requires a student from the existing list, a subject from the existing list, a mark between 0 and 20 and a coefficient of at least 1-->
-    <form (ngSubmit)="addGrade()">
-      <select [(ngModel)]="newGrade.id_student" name="student" required>
-        <option *ngFor="let student of students" [value]="student.id">{{ student.name }}</option>
-      </select>
-      <select [(ngModel)]="newGrade.id_subject" name="subject" required>
-        <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
-      </select>
-      <input type="number" [(ngModel)]="newGrade.mark" name="mark" placeholder="Mark" min="0" max="20" required />
-      <input type="number" [(ngModel)]="newGrade.coefficient" name="coefficient" placeholder="Coefficient" min="1" />
-      <button type="submit">Add Grade</button>
-    </form>
-  
-    <!-- Add Student -->
-    <h3>Add Student</h3>
-    <!-- Creation of a form to add a new student to the database -->
-    <form (ngSubmit)="addStudent()">
-      <input type="text" [(ngModel)]="newStudentName" name="studentName" placeholder="Student Name" required />
-      <button type="submit">Add Student</button>
-    </form>
-  
-    <!-- Add Subject -->
-    <h3>Add Subject</h3>
-     <!-- Creation of a form to add a new subject to the database -->
-    <form (ngSubmit)="addSubject()">
-      <input type="text" [(ngModel)]="newSubjectName" name="subjectName" placeholder="Subject Name" required />
-      <button type="submit">Add Subject</button>
-    </form>
-  
-    <!-- Grade List -->
-    <h3>Grade List</h3>
-    <ul>
-      <li *ngFor="let grade of grades">
-        Student {{ grade.Student.name }} - Subject {{ grade.Subject.name }}: {{ grade.mark }}
-        <button (click)="deleteGrade(grade.id)">Delete</button>
-        <button (click)="updateGrade(grade)">Update</button>
-      </li>
-    </ul>
+  <div class="row">
+    <div class="column">
+      <h2>Manage Students</h2>
+
+      <!-- Add Student -->
+      <h3>Add Student</h3>
+      <form (ngSubmit)="addStudent()">
+        <input type="text" [(ngModel)]="newStudentName" name="studentName" placeholder="Student Name" required />
+        <button type="submit">Add Student</button>
+      </form>
+
+      <!-- Remove Student -->
+      <h3>Remove Student</h3>
+      <form (ngSubmit)="removeStudent(studentToRemove)">
+        <label for="student">Student: </label>
+        <select id="student" [(ngModel)]="studentToRemove" name="student" required>
+          <option *ngFor="let student of students" [value]="student.id">{{ student.name }}</option>
+        </select>
+        <button type="submit">Remove Student</button>
+      </form>
+    </div>
+
+    <div class="column">
+      <h2>Manage Subjects</h2>
+
+      <!-- Add Subject -->
+      <h3>Add Subject</h3>
+      <form (ngSubmit)="addSubject()">
+        <input type="text" [(ngModel)]="newSubjectName" name="subjectName" placeholder="Subject Name" required />
+        <button type="submit">Add Subject</button>
+      </form>
+    
+      <!-- Remove Subject -->
+      <h3>Remove Subject</h3>
+      <form (ngSubmit)="removeSubject(subjectToRemove)">
+        <label for="subject">Subject: </label>
+        <select id="subject" [(ngModel)]="subjectToRemove" name="subject" required>
+          <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
+        </select>
+        <button type="submit">Remove Subject</button>
+      </form>    
+    </div>
+
+    <div class="column">
+      <h2>Manage Grades</h2>
+
+      <!-- Add Grade -->
+      <h3>Add Grade</h3>
+      <form (ngSubmit)="addGrade()">
+        <label for="student">Student: </label>
+        <select id="student" [(ngModel)]="newGrade.id_student" name="student" required>
+          <option *ngFor="let student of students" [value]="student.id">{{ student.name }}</option>
+        </select>
+    
+        <br>
+        
+        <label for="subject">Subject: </label>
+        <select id="subject" [(ngModel)]="newGrade.id_subject" name="subject" required>
+          <option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</option>
+        </select>
+    
+        <br>
+        
+        <label for="mark">Mark: </label>
+        <input id="mark" type="number" [(ngModel)]="newGrade.mark" name="mark" placeholder="Mark" min="0" max="20" required/>
+        
+        <br>
+    
+        <label for="coefficient">Coefficient: </label>
+        <input id="coefficient" type="number" [(ngModel)]="newGrade.coefficient" name="coefficient" placeholder="Coefficient" min="1"/>
+        
+        <br>
+    
+        <button type="submit">Add Grade</button>
+      </form>
+    
+      <!-- Grade List -->
+      <h3>Grade List</h3>
+      <ul>
+        <li *ngFor="let grade of grades">
+          <div *ngIf="!grade.isEditing">
+            Student: {{ grade.Student.name }} - Subject: {{ grade.Subject.name }} - Mark: {{ grade.mark }} - Coefficient: {{ grade.coefficient }}
+            <button (click)="editGrade(grade)">Edit</button>
+            <button (click)="deleteGrade(grade.id)">Delete</button>
+          </div>
+          <div *ngIf="grade.isEditing">
+            Student: {{ grade.Student.name }} - Subject: {{ grade.Subject.name }}
+            <form (ngSubmit)="updateGrade(grade)">
+              <label for="new_mark">Mark: </label>
+              <input id="new_mark" type="number" [(ngModel)]="grade.mark" name="mark" placeholder="Mark" min="0" max="20" required/>
+              
+              <label for="new_coefficient">Coefficient: </label>
+              <input id="new_coefficient" type="number" [(ngModel)]="grade.coefficient" name="coefficient" placeholder="Coefficient" min="1"/>
+    
+              <button type="submit">Save</button>
+              <button type="button" (click)="cancelEdit(grade)">Cancel</button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
+</div>
   

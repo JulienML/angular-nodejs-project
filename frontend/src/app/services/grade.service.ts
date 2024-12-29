@@ -22,6 +22,10 @@ export class GradeService {
     return this.http.post(`${this.apiUrl}/students`, student);
   }
 
+  deleteStudent(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/students/${id}`);
+  }
+
   // Subjects
   // API to fetch all existant subjects from the database
   getSubjects(): Observable<any> {
@@ -31,6 +35,10 @@ export class GradeService {
   // API to add a new subject to the database
   addSubject(subject: { name: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/subjects`, subject);
+  }
+
+  deleteSubject(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/subjects/${id}`);
   }
 
   // Marks
