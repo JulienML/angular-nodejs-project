@@ -1,9 +1,9 @@
-
 import express, { Request, Response } from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import * as swaggerUi from 'swagger-ui-express';
 import { Sequelize, DataTypes } from 'sequelize';
 import cors from 'cors';
+import { populateTables } from './seed';
 
 // PostgreSQL database setup
 const sequelize = new Sequelize({
@@ -79,82 +79,9 @@ const syncDatabase = async () => {
   }
 };
 
-//Data seed
-const populateDatabase = async () => {
-  try {
-    await Student.bulkCreate([
-      { name: 'Ali' },
-      { name: 'Adrien' },
-      { name: 'Julien' },
-      { name: 'Mathieu' },
-      { name: 'Thomas' },
-    ]);
-
-    await Subject.bulkCreate([
-      { name: 'Mathematics' },
-      { name: 'Physics' },
-      { name: 'Informatic' },
-    ]);
-
-    await Mark.bulkCreate([
-      { id_student: 1, id_subject: 1, mark: 15, coefficient: 2 },
-      { id_student: 2, id_subject: 1, mark: 12, coefficient: 2 },
-      { id_student: 3, id_subject: 1, mark: 14, coefficient: 2 },
-      { id_student: 4, id_subject: 1, mark: 16, coefficient: 2 },
-      { id_student: 5, id_subject: 1, mark: 18, coefficient: 2 },
-      { id_student: 1, id_subject: 1, mark: 13, coefficient: 1 },
-      { id_student: 2, id_subject: 1, mark: 10, coefficient: 1 },
-      { id_student: 3, id_subject: 1, mark: 13, coefficient: 1 },
-      { id_student: 4, id_subject: 1, mark: 17, coefficient: 1 },
-      { id_student: 5, id_subject: 1, mark: 17, coefficient: 1 },
-      { id_student: 1, id_subject: 1, mark: 16, coefficient: 3 },
-      { id_student: 2, id_subject: 1, mark: 14, coefficient: 3 },
-      { id_student: 3, id_subject: 1, mark: 12, coefficient: 3 },
-      { id_student: 4, id_subject: 1, mark: 18, coefficient: 3 },
-      { id_student: 5, id_subject: 1, mark: 16, coefficient: 3 },
-
-      { id_student: 1, id_subject: 2, mark: 10, coefficient: 1 },
-      { id_student: 2, id_subject: 2, mark: 13, coefficient: 1 },
-      { id_student: 3, id_subject: 2, mark: 16, coefficient: 1 },
-      { id_student: 4, id_subject: 2, mark: 13, coefficient: 1 },
-      { id_student: 5, id_subject: 2, mark: 17, coefficient: 1 },
-      { id_student: 1, id_subject: 2, mark: 12, coefficient: 2 },
-      { id_student: 2, id_subject: 2, mark: 14, coefficient: 2 },
-      { id_student: 3, id_subject: 2, mark: 14, coefficient: 2 },
-      { id_student: 4, id_subject: 2, mark: 14, coefficient: 2 },
-      { id_student: 5, id_subject: 2, mark: 15, coefficient: 2 },
-      { id_student: 1, id_subject: 2, mark: 15, coefficient: 3 },
-      { id_student: 2, id_subject: 2, mark: 16, coefficient: 3 },
-      { id_student: 3, id_subject: 2, mark: 15, coefficient: 3 },
-      { id_student: 4, id_subject: 2, mark: 18, coefficient: 3 },
-      { id_student: 5, id_subject: 2, mark: 16, coefficient: 3 },
-      
-      { id_student: 1, id_subject: 3, mark: 18, coefficient: 3 },
-      { id_student: 2, id_subject: 3, mark: 17, coefficient: 3 },
-      { id_student: 3, id_subject: 3, mark: 16, coefficient: 3 },
-      { id_student: 4, id_subject: 3, mark: 20, coefficient: 3 },
-      { id_student: 5, id_subject: 3, mark: 19, coefficient: 3 },
-      { id_student: 1, id_subject: 3, mark: 16, coefficient: 2 },
-      { id_student: 2, id_subject: 3, mark: 18, coefficient: 2 },
-      { id_student: 3, id_subject: 3, mark: 14, coefficient: 2 },
-      { id_student: 4, id_subject: 3, mark: 18, coefficient: 2 },
-      { id_student: 5, id_subject: 3, mark: 18, coefficient: 2 },
-      { id_student: 1, id_subject: 3, mark: 14, coefficient: 1 },
-      { id_student: 2, id_subject: 3, mark: 19, coefficient: 1 },
-      { id_student: 3, id_subject: 3, mark: 15, coefficient: 1 },
-      { id_student: 4, id_subject: 3, mark: 17, coefficient: 1 },
-      { id_student: 5, id_subject: 3, mark: 20, coefficient: 1 },
-    ]);
-
-    console.log('Data inserted successfully.');
-  } catch (error) {
-    console.error('Error inserting data:', error);
-  }
-};
-
 const startServer = async () => {
   await syncDatabase();
-  await populateDatabase();
+  await populateTables(Student, Subject, Mark);
   sequelize.sync();
   try {
     await sequelize.authenticate();
@@ -267,4 +194,44 @@ app.delete('/students/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   await Student.destroy({ where: { id } });
   res.status(204).send();
+});
+
+//Api qui doit retourner l'id et noms des students ainsi que leur moyenne générale
+app.get('/students/averages', async (req: Request, res: Response): Promise<void> => {
+  try {
+    const students = await Student.findAll();
+
+    if (!students || students.length === 0) {
+      res.status(404).json({ error: 'No students found.' });
+      return;
+    }
+
+    const marks = await Mark.findAll();
+
+    const result = students.map(student => {
+      const studentMarks = marks.filter(mark => mark.get('id_student') === student.get('id'));
+
+      const totalMarks = studentMarks.reduce(
+          (sum, mark) => sum + (mark.get('mark') as number) * (mark.get('coefficient') as number),
+          0
+      );
+      const totalCoefficients = studentMarks.reduce(
+          (sum, mark) => sum + (mark.get('coefficient') as number),
+          0
+      );
+
+      const average = totalCoefficients > 0 ? totalMarks / totalCoefficients : 0;
+
+      return {
+        id: student.get('id'),
+        name: student.get('name'),
+        average: parseFloat(average.toFixed(2)),
+      };
+    });
+
+    res.status(200).json(result); // Retourner les 5 premiers étudiants
+  } catch (error) {
+    console.error('Error fetching averages:', error);
+    res.status(500).json({ error: 'An error occurred while fetching averages.' });
+  }
 });
