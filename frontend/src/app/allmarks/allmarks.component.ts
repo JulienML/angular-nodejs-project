@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AllMarksService } from '../Services/AllMarksService';
+import { AllMarksService } from '../services/AllMarksService';
 import { AgGridModule } from 'ag-grid-angular';
 import { GridApi, ColDef, GridReadyEvent } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';

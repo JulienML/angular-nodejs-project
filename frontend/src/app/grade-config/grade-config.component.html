@@ -84,6 +84,7 @@
             <button (click)="editGrade(grade)">Edit</button>
             <button (click)="deleteGrade(grade.id)">Delete</button>
           </div>
+          <!-- If the grade is being edited, show the following form -->
           <div *ngIf="grade.isEditing">
             Student: {{ grade.Student.name }} - Subject: {{ grade.Subject.name }}
             <form (ngSubmit)="updateGrade(grade)">

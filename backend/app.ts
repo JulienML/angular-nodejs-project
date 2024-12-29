@@ -68,7 +68,6 @@ Mark.belongsTo(Student, { foreignKey: 'id_student' });
 Subject.hasMany(Mark, { foreignKey: 'id_subject' });
 Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
 
-
 // Synchronizing the database
 const syncDatabase = async () => {
   try {
