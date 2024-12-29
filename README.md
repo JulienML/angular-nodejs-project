@@ -40,7 +40,7 @@ For features which are categorical data (letters), for instance Name, you can do
 See the following image  for example of filtering by ascending order, it is the same principle for descending order
 Sorting cannot be done simulanously with multiple features
 
-//![aggrid_image1](./screens/home.png)
+
 
 ### Filtering
 With ag-grid it is also possible to filter the data on the grid. You do that by clicking on the icon which is on the top left of the column which interests you (at the level of the title of the column), then you will have two sorts of filtering:
