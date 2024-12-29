@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Administration platform - all marks of students</h1>
+  <p>Grid displaying all of the data of the students (id, name, subjects, marks)</p>
+
+  <div class="grid-container">
+    <ag-grid-angular
+      class="ag-theme-alpine"
+      style="height: 350px; width: 87%;"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+    ></ag-grid-angular>
+  </div>
+</div>

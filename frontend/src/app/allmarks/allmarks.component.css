@@ -1,0 +1,42 @@
+/* container layout parameters */
+.container {
+  margin: 20px auto; /* centers the box and gives space around it */
+  max-width: 1300px; /* maximum supported width, adapted to the grid */
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 40px ; /* space inside of container around of content */
+  border: 2px solid #ccc; /* thick light grey border */
+  border-radius: 15px; /* rounded corners of the box */
+  background-color: #f4f7fb; /* bright background color */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* shadow of box */
+}
+
+/* Main Title layout parameters */
+.container h1 {
+  color: #222; /* dark color */
+  font-size: 28px; /* size of text */
+  margin-bottom: 20px; /* spacing under the title */
+  font-weight: bold;
+}
+
+/* Subtitle layout parameters */
+.container p {
+  color: #666; /* brighter color than the main title */
+  font-size: 18px; /* lower font size than the main title */
+  margin-bottom: 30px; /* more space under the subtitle */
+}
+
+/* grid-container layout parameters  */
+.grid-container {
+  margin: 20px auto; /* space around the centered box */
+  display: flex; /* enabling of Flexbox for alignment and spacing */
+  justify-content: center; /* center the content horizontally */
+  align-items: center; /* center the content vertically */
+  padding: 20px; /* space inside of container around of content */
+  max-width: 1400px; /* container's maximum width */
+  background-color: #ffffff; /* background color is white */
+  border-radius: 10px; /* rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
+}
+
+
