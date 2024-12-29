@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgGridModule } from 'ag-grid-angular';
 import { ColDef } from 'ag-grid-community';
-import { MainMarksService } from '../Services/MainMarksServices';
+import { MainMarksService } from '../services/MainMarksServices';
 import { catchError, of } from 'rxjs';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 ModuleRegistry.registerModules([AllCommunityModule]); // Register all community modules
