@@ -59,7 +59,9 @@ Once you enter your argument, you can choose or not to do a AND or a OR with ano
 *On this image you see the following filtering by ID : lower than 5 OR equal 8*
 ![Home_screen3](./screens/Home_screen3.png)
 
+
 *Exemple of console of filtering*
+
 ![Home_screen6](./screens/Home_screen6.png)
 
 
@@ -78,7 +80,9 @@ Once you enter your argument, you can choose or not to do a AND or a OR with ano
 
 *To take out the filtering you just go back on the filtering icon you selected and you delete the argument you put for the filtering, and it will go back to normal*
 
+
 *Exemple of console of filtering*
+
 ![Home_screen7](./screens/Home_screen7.png)
 
 ## All Marks Page
