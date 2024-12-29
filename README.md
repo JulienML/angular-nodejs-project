@@ -27,11 +27,46 @@ The home page shows all students in the database with their overall grade averag
 
 ![Home Page](./screens/home.png)
 
+When you arrive the Home Page, you will see the navigation grid (black band) with "Home" and all of the other pages
+Obviously, you arrive automatically on the Home page, but you can always click on "Home" when you are on another page to go back to it.
+What you see here is an ag-grid with the ID and the name of each student of the database with their average mark, which means the average of all of their marks (see aggrid_image1)
+When your cursor is on the grid you can always scroll to see all of the remaining rows.
+
+### Sorting
+With ag-grid it is possible to sort the data on the grid. You do that by clicking on the feature you wish to sort by. 
+For instance, if you click a first time on the feature (title of column) "ID" or any numerical feature, you will see an up-arrow next to the name of columnwhich means that you can see now the data ordered by ID in ascending order, if you click again you will see a down-arrow which means that you can see now the data ordered by ID in descending order. If you click a final time, the sorting will be back to the initial sorting of the data.
+For features which are categorical data (letters), for instance Name, you can do the same thing, it will be by alphabetical order.
+See the following image  for example of filtering by ascending order, it is the same principle for descending order
+Sorting cannot be done simulanously with multiple features
+//aggrid_image2
+
+### Filtering
+With ag-grid it is also possible to filter the data on the grid. You do that by clicking on the icon which is on the top left of the column which interests you (at the level of the title of the column), then you will have two sorts of filtering:
+
+#### Filtering on numerical data
+You can filter by the following functions : equal, does not equal, greater than, greater than or equal to, less than, less than or equal to, between, blank, not blank.
+You choose one function to do your filtering than then you enter your argument (example for ID : lower than 5)
+//aggrid_image3
+once you enter your argument, you can choose or not to do a AND or a OR with another function (example for ID : lower than 5 OR equal 8 - aggrid_image4)
+
+#### Filtering on categorical data (letters)
+You can filter by the following functions : Contains, Does not contain, Equals, Does not equal, Begins with, Ends with, Blank, Not Blank.
+You choose one function to do your filtering than then you enter your argument (example for Name : Contains o)
+//aggrid_image4
+once you enter your argument, you can choose or not to do a AND or a OR with another function (example for Name : Contains o AND equals Begins with L)
+You can also do simultaneous filtering on multiple features, and you can also do one sorting simultaneously to your filtering
+//aggrid_image5
+
+
 ## All Marks Page
 
 The All Marks page displays all the marks of all students in the database using `ag-grid`.
 
 ![All Marks Page](./screens/all-marks.png)
+
+What you see here is an ag-grid with, for each mark of the database, the corresponding Student ID, Student Name, Subject ID, Subject Name and Mark Value
+The principle of filtering and sorting of the data is exactly the same as in the Home Page, it is simply more interesting here since we have more rows and columns in the ag-grid.
+
 
 ## Grade Configuration Page
 
