@@ -29,7 +29,9 @@ export class GradeConfigComponent implements OnInit {
   loadData() {
     this.gradeService.getStudents().subscribe((data: any[]) => (this.students = data));
     this.gradeService.getSubjects().subscribe((data: any[]) => (this.subjects = data));
-    this.gradeService.getMarks().subscribe((data: any[]) => (this.grades = data));
+    this.gradeService.getMarks().subscribe((data: any[]) => {
+      this.grades = data.map(grade => ({ ...grade, isEditing: false }));
+    });
   }
   
   // Add a new student
@@ -63,11 +65,27 @@ export class GradeConfigComponent implements OnInit {
     }
   }
 
+  // Edit a grade
+  editGrade(grade: any) {
+    grade.isEditing = true;
+  }
+
+  // Cancel editing a grade
+  cancelEdit(grade: any) {
+    grade.isEditing = false;
+  }
+
   // Update an existing grade
   updateGrade(grade: any) {
-    const updatedMark = { mark: grade.mark, coefficient: grade.coefficient };
-    this.gradeService.updateMark(grade.id, updatedMark).subscribe(() => {
-      this.loadData(); // Refresh data
+    grade.isEditing = false;
+    console.log(grade);
+    const { id, mark, coefficient } = grade;
+    const updatedMark = { mark, coefficient };
+    this.gradeService.updateMark(id, updatedMark).subscribe(() => {
+      const index = this.grades.findIndex(g => g.id === id);
+      if (index !== -1) {
+        this.grades[index] = { ...this.grades[index], mark, coefficient };
+      }
     });
   }
 
