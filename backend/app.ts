@@ -27,7 +27,7 @@ const Student = sequelize.define('Student', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-})
+});
 
 const Subject = sequelize.define('Subject', {
   id: {
@@ -56,6 +56,7 @@ const Mark = sequelize.define('Mark', {
   },
   coefficient: {
     type: DataTypes.INTEGER,
+
     defaultValue: 1
   }
 });
