@@ -23,6 +23,7 @@
     "ag-grid-angular": "^33.0.3",
     "ag-grid-community": "^33.0.3",
     "ag-grid-react": "^33.0.3",
+    "bootstrap": "^5.3.3",
     "highcharts": "^12.1.2",
     "highcharts-angular": "^4.0.1",
     "rxjs": "~7.8.0",

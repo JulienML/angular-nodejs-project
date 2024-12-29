@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Highcharts from 'highcharts';
-import { GradeService } from '../services/grade.service';
+import { GradeService } from '../Services/grade.service';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 
 @Component({

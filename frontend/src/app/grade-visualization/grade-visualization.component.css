@@ -1,9 +1,13 @@
 .highcharts-container {
   width: 100% !important;
-  height: 400px !important; /* Fixe une hauteur explicite */
+  height: 400px !important;
 }
 
 .highcharts-figure {
   width: 100%;
   height: 400px;
+}
+
+.indented-section {
+  margin-left: 20px;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GradeService } from '../services/grade.service';
+import { GradeService } from '../Services/grade.service';
 
 @Component({
   selector: 'app-grade-config',
@@ -31,7 +31,7 @@ export class GradeConfigComponent implements OnInit {
     this.gradeService.getSubjects().subscribe((data: any[]) => (this.subjects = data));
     this.gradeService.getMarks().subscribe((data: any[]) => (this.grades = data));
   }
-  
+
   // Add a new student
   addStudent() {
     if (this.newStudentName.trim()) {

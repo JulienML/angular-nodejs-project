@@ -10,8 +10,8 @@ const sequelize = new Sequelize({
   dialect: 'postgres',
   host: 'localhost',
   port: 5432,
-  username: 'SchoolDbUser',
-  password: 'admin',
+  username: 'postgres',
+  password: 'mathieu',
   database: 'SchoolDb',
 })
 
@@ -69,80 +69,198 @@ Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
 
 
 // Synchronizing the database
-sequelize.sync();
+const syncDatabase = async () => {
+  try {
+    await sequelize.sync({ force: true });
+    console.log('Database synchronized successfully.');
+  } catch (error) {
+    console.error('Error synchronizing the database:', error);
+  }
+};
 
 //Data seed
 const populateDatabase = async () => {
   try {
-    await sequelize
-      .sync({ force: true })
-      .then(() => {
-        console.log('Database synced successfully!');
-      })
-      .catch((error) => {
-        console.error('Error syncing database:', error);
-      });
-
     await Student.bulkCreate([
       { name: 'Ali' },
       { name: 'Adrien' },
       { name: 'Julien' },
       { name: 'Mathieu' },
       { name: 'Thomas' },
+      { name: 'Jérémy' },
+      { name: 'Sarah' },
+      { name: 'Maxence' },
+      { name: 'Antoine' },
+      { name: 'Louise' },
+      /*{ name: 'Valentin' },
+      { name: 'Thomas' },
+      { name: 'Laurent' },
+      { name: 'Adèle' },
+      { name: 'Charles' },*/
     ]);
 
+
+    // Insertion of the subjects
     await Subject.bulkCreate([
       { name: 'Mathematics' },
       { name: 'Physics' },
       { name: 'Informatic' },
     ]);
 
+    // Insertion of the marks
     await Mark.bulkCreate([
-      { id_student: 1, id_subject: 1, mark: 15, coefficient: 2 },
+      // Mathematics
+      //first test : coefficient 2
+      //Example : Ali had a mark of 15/20 for his first mathematics test (coefficient 2)
+      { id_student: 1, id_subject: 1, mark: 18, coefficient: 2 },
       { id_student: 2, id_subject: 1, mark: 12, coefficient: 2 },
       { id_student: 3, id_subject: 1, mark: 14, coefficient: 2 },
       { id_student: 4, id_subject: 1, mark: 16, coefficient: 2 },
-      { id_student: 5, id_subject: 1, mark: 18, coefficient: 2 },
-      { id_student: 1, id_subject: 1, mark: 13, coefficient: 1 },
-      { id_student: 2, id_subject: 1, mark: 10, coefficient: 1 },
-      { id_student: 3, id_subject: 1, mark: 13, coefficient: 1 },
-      { id_student: 4, id_subject: 1, mark: 17, coefficient: 1 },
-      { id_student: 5, id_subject: 1, mark: 17, coefficient: 1 },
-      { id_student: 1, id_subject: 1, mark: 16, coefficient: 3 },
-      { id_student: 2, id_subject: 1, mark: 14, coefficient: 3 },
-      { id_student: 3, id_subject: 1, mark: 12, coefficient: 3 },
-      { id_student: 4, id_subject: 1, mark: 18, coefficient: 3 },
-      { id_student: 5, id_subject: 1, mark: 16, coefficient: 3 },
-      { id_student: 1, id_subject: 2, mark: 10, coefficient: 1 },
-      { id_student: 2, id_subject: 2, mark: 13, coefficient: 1 },
-      { id_student: 3, id_subject: 2, mark: 16, coefficient: 1 },
-      { id_student: 4, id_subject: 2, mark: 13, coefficient: 1 },
-      { id_student: 5, id_subject: 2, mark: 17, coefficient: 1 },
-      { id_student: 1, id_subject: 2, mark: 12, coefficient: 2 },
-      { id_student: 2, id_subject: 2, mark: 14, coefficient: 2 },
-      { id_student: 3, id_subject: 2, mark: 14, coefficient: 2 },
-      { id_student: 4, id_subject: 2, mark: 14, coefficient: 2 },
-      { id_student: 5, id_subject: 2, mark: 15, coefficient: 2 },
-      { id_student: 1, id_subject: 2, mark: 15, coefficient: 3 },
-      { id_student: 2, id_subject: 2, mark: 16, coefficient: 3 },
-      { id_student: 3, id_subject: 2, mark: 15, coefficient: 3 },
-      { id_student: 4, id_subject: 2, mark: 18, coefficient: 3 },
-      { id_student: 5, id_subject: 2, mark: 16, coefficient: 3 },
-      { id_student: 1, id_subject: 3, mark: 18, coefficient: 3 },
-      { id_student: 2, id_subject: 3, mark: 17, coefficient: 3 },
-      { id_student: 3, id_subject: 3, mark: 16, coefficient: 3 },
-      { id_student: 4, id_subject: 3, mark: 20, coefficient: 3 },
-      { id_student: 5, id_subject: 3, mark: 19, coefficient: 3 },
-      { id_student: 1, id_subject: 3, mark: 16, coefficient: 2 },
-      { id_student: 2, id_subject: 3, mark: 18, coefficient: 2 },
-      { id_student: 3, id_subject: 3, mark: 14, coefficient: 2 },
-      { id_student: 4, id_subject: 3, mark: 18, coefficient: 2 },
-      { id_student: 5, id_subject: 3, mark: 18, coefficient: 2 },
-      { id_student: 1, id_subject: 3, mark: 14, coefficient: 1 },
-      { id_student: 2, id_subject: 3, mark: 19, coefficient: 1 },
+      { id_student: 5, id_subject: 1, mark: 17, coefficient: 2 },
+      { id_student: 6, id_subject: 1, mark: 10, coefficient: 2 },
+      { id_student: 7, id_subject: 1, mark: 13, coefficient: 2 },
+      { id_student: 8, id_subject: 1, mark: 15, coefficient: 2 },
+      { id_student: 9, id_subject: 1, mark: 17, coefficient: 2 },
+      { id_student: 10, id_subject: 1, mark: 11, coefficient: 2 },/*
+      { id_student: 11, id_subject: 1, mark: 20, coefficient: 2 },
+      { id_student: 12, id_subject: 1, mark: 10, coefficient: 2 },
+      { id_student: 13, id_subject: 1, mark: 19, coefficient: 2 },
+      { id_student: 14, id_subject: 1, mark: 20, coefficient: 2 },
+      { id_student: 15, id_subject: 1, mark: 14, coefficient: 2 },*/
+
+
+      //second test, coefficient 1
+      { id_student: 1, id_subject: 1, mark: 17, coefficient: 1},
+      { id_student: 2, id_subject: 1, mark: 12, coefficient: 1 },
+      { id_student: 3, id_subject: 1, mark: 14, coefficient: 1 },
+      { id_student: 4, id_subject: 1, mark: 16, coefficient: 1 },
+      { id_student: 5, id_subject: 1, mark: 15, coefficient: 1 },
+      { id_student: 6, id_subject: 1, mark: 17, coefficient: 1 },
+      { id_student: 7, id_subject: 1, mark: 13, coefficient: 1 },
+      { id_student: 8, id_subject: 1, mark: 17, coefficient: 1 },
+      { id_student: 9, id_subject: 1, mark: 17, coefficient: 1 },
+      { id_student: 10, id_subject: 1, mark: 12, coefficient: 1 },
+      /*{ id_student: 11, id_subject: 1, mark: 20, coefficient: 1 },
+      { id_student: 12, id_subject: 1, mark: 12, coefficient: 1 },
+      { id_student: 13, id_subject: 1, mark: 12, coefficient: 1 },
+      { id_student: 14, id_subject: 1, mark: 11, coefficient: 1 },
+      { id_student: 15, id_subject: 1, mark: 20, coefficient: 1 },*/
+
+      //third test, coefficient 3
+      { id_student: 1, id_subject: 1, mark: 19, coefficient: 3},
+      { id_student: 2, id_subject: 1, mark: 13, coefficient: 3 },
+      { id_student: 3, id_subject: 1, mark: 16, coefficient: 3 },
+      { id_student: 4, id_subject: 1, mark: 11, coefficient: 3 },
+      { id_student: 5, id_subject: 1, mark: 13, coefficient: 3 },
+      { id_student: 6, id_subject: 1, mark: 12, coefficient: 3 },
+      { id_student: 7, id_subject: 1, mark: 17, coefficient: 3 },
+      { id_student: 8, id_subject: 1, mark: 10, coefficient: 3 },
+      { id_student: 9, id_subject: 1, mark: 11, coefficient: 3 },
+      { id_student: 10, id_subject: 1, mark: 10, coefficient: 3 },/*
+      { id_student: 11, id_subject: 1, mark: 18, coefficient: 3 },
+      { id_student: 12, id_subject: 1, mark: 11, coefficient: 3 },
+      { id_student: 13, id_subject: 1, mark: 10, coefficient: 3 },
+      { id_student: 14, id_subject: 1, mark: 14, coefficient: 3 },
+      { id_student: 15, id_subject: 1, mark: 15, coefficient: 3 },*/
+
+      // Physics
+      //first test, coefficient 1
+      { id_student: 1, id_subject: 2, mark: 20, coefficient: 1},
+      { id_student: 2, id_subject: 2, mark: 12, coefficient: 1 },
+      { id_student: 3, id_subject: 2, mark: 15, coefficient: 1 },
+      { id_student: 4, id_subject: 2, mark: 17, coefficient: 1 },
+      { id_student: 5, id_subject: 2, mark: 16, coefficient: 1 },
+      { id_student: 6, id_subject: 2, mark: 18, coefficient: 1 },
+      { id_student: 7, id_subject: 2, mark: 12, coefficient: 1 },
+      { id_student: 8, id_subject: 2, mark: 14, coefficient: 1 },
+      { id_student: 9, id_subject: 2, mark: 16, coefficient: 1 },
+      { id_student: 10, id_subject: 2, mark: 14, coefficient: 1 },/*
+      { id_student: 11, id_subject: 2, mark: 19, coefficient: 1 },
+      { id_student: 12, id_subject: 2, mark: 13, coefficient: 1 },
+      { id_student: 13, id_subject: 2, mark: 11, coefficient: 1 },
+      { id_student: 14, id_subject: 2, mark: 10, coefficient: 1 },
+      { id_student: 15, id_subject: 2, mark: 18, coefficient: 1 },*/
+      //second test, coefficient 2
+      { id_student: 1, id_subject: 2, mark: 19, coefficient: 2},
+      { id_student: 2, id_subject: 2, mark: 12, coefficient: 2 },
+      { id_student: 3, id_subject: 2, mark: 13, coefficient: 2 },
+      { id_student: 4, id_subject: 2, mark: 15, coefficient: 2 },
+      { id_student: 5, id_subject: 2, mark: 16, coefficient: 2 },
+      { id_student: 6, id_subject: 2, mark: 16, coefficient: 2 },
+      { id_student: 7, id_subject: 2, mark: 12, coefficient: 2 },
+      { id_student: 8, id_subject: 2, mark: 12, coefficient: 2 },
+      { id_student: 9, id_subject: 2, mark: 13, coefficient: 2 },
+      { id_student: 10, id_subject: 2, mark: 12, coefficient: 2 },/*
+      { id_student: 11, id_subject: 2, mark: 14, coefficient: 2 },
+      { id_student: 12, id_subject: 2, mark: 11, coefficient: 2 },
+      { id_student: 13, id_subject: 2, mark: 10, coefficient: 2 },
+      { id_student: 14, id_subject: 2, mark: 8, coefficient: 2 },
+      { id_student: 15, id_subject: 2, mark: 17, coefficient: 2 },*/
+      //third test, coefficient 3
+      { id_student: 1, id_subject: 2, mark: 18, coefficient: 3},
+      { id_student: 2, id_subject: 2, mark: 10, coefficient: 3 },
+      { id_student: 3, id_subject: 2, mark: 11, coefficient: 3 },
+      { id_student: 4, id_subject: 2, mark: 12, coefficient: 3 },
+      { id_student: 5, id_subject: 2, mark: 14, coefficient: 3 },
+      { id_student: 6, id_subject: 2, mark: 12, coefficient: 3 },
+      { id_student: 7, id_subject: 2, mark: 9, coefficient: 3 },
+      { id_student: 8, id_subject: 2, mark: 11, coefficient: 3 },
+      { id_student: 9, id_subject: 2, mark: 12, coefficient: 3 },
+      { id_student: 10, id_subject: 2, mark: 10, coefficient: 3 },/*
+      { id_student: 11, id_subject: 2, mark: 12, coefficient: 3 },
+      { id_student: 12, id_subject: 2, mark: 10, coefficient: 3 },
+      { id_student: 13, id_subject: 2, mark: 10, coefficient: 3 },
+      { id_student: 14, id_subject: 2, mark: 10, coefficient: 3 },
+      { id_student: 15, id_subject: 2, mark: 16, coefficient: 3 },*/
+      // Informatic
+      //first test, coefficient 3
+      { id_student: 1, id_subject: 3, mark: 18, coefficient: 3},
+      { id_student: 2, id_subject: 3, mark: 12, coefficient: 3 },
+      { id_student: 3, id_subject: 3, mark: 17, coefficient: 3 },
+      { id_student: 4, id_subject: 3, mark: 16, coefficient: 3 },
+      { id_student: 5, id_subject: 3, mark: 15, coefficient: 3 },
+      { id_student: 6, id_subject: 3, mark: 18, coefficient: 3 },
+      { id_student: 7, id_subject: 3, mark: 16, coefficient: 3 },
+      { id_student: 8, id_subject: 3, mark: 17, coefficient: 3 },
+      { id_student: 9, id_subject: 3, mark: 20, coefficient: 3 },
+      { id_student: 10, id_subject: 3, mark: 13, coefficient: 3 },/*
+      { id_student: 11, id_subject: 3, mark: 14, coefficient: 3 },
+      { id_student: 12, id_subject: 3, mark: 16, coefficient: 3 },
+      { id_student: 13, id_subject: 3, mark: 18, coefficient: 3 },
+      { id_student: 14, id_subject: 3, mark: 17, coefficient: 3 },
+      { id_student: 15, id_subject: 3, mark: 20, coefficient: 3 },*/
+      //second test, coefficient 2
+      { id_student: 1, id_subject: 3, mark: 19, coefficient: 2},
+      { id_student: 2, id_subject: 3, mark: 14, coefficient: 2 },
+      { id_student: 3, id_subject: 3, mark: 16, coefficient: 2 },
+      { id_student: 4, id_subject: 3, mark: 20, coefficient: 2 },
+      { id_student: 5, id_subject: 3, mark: 14, coefficient: 2 },
+      { id_student: 6, id_subject: 3, mark: 15, coefficient: 2 },
+      { id_student: 7, id_subject: 3, mark: 19, coefficient: 2 },
+      { id_student: 8, id_subject: 3, mark: 20, coefficient: 2 },
+      { id_student: 9, id_subject: 3, mark: 20, coefficient: 2 },
+      { id_student: 10, id_subject: 3, mark: 12, coefficient: 2 },/*
+      { id_student: 11, id_subject: 3, mark: 14, coefficient: 2 },
+      { id_student: 12, id_subject: 3, mark: 16, coefficient: 2 },
+      { id_student: 13, id_subject: 3, mark: 18, coefficient: 2 },
+      { id_student: 14, id_subject: 3, mark: 18, coefficient: 2 },
+      { id_student: 15, id_subject: 3, mark: 19, coefficient: 2 },*/
+      //third test, coefficient 1
+      { id_student: 1, id_subject: 3, mark: 20, coefficient: 1},
+      { id_student: 2, id_subject: 3, mark: 11, coefficient: 1 },
       { id_student: 3, id_subject: 3, mark: 15, coefficient: 1 },
       { id_student: 4, id_subject: 3, mark: 17, coefficient: 1 },
-      { id_student: 5, id_subject: 3, mark: 20, coefficient: 1 },
+      { id_student: 5, id_subject: 3, mark: 15, coefficient: 1 },
+      { id_student: 6, id_subject: 3, mark: 17, coefficient: 1 },
+      { id_student: 7, id_subject: 3, mark: 20, coefficient: 1 },
+      { id_student: 8, id_subject: 3, mark: 15, coefficient: 1 },
+      { id_student: 9, id_subject: 3, mark: 14, coefficient: 1 },
+      { id_student: 10, id_subject: 3, mark: 13, coefficient: 1 }/*,
+      { id_student: 11, id_subject: 3, mark: 17, coefficient: 1 },
+      { id_student: 12, id_subject: 3, mark: 18, coefficient: 1 },
+      { id_student: 13, id_subject: 3, mark: 16, coefficient: 1 },
+      { id_student: 14, id_subject: 3, mark: 19, coefficient: 1 },
+      { id_student: 15, id_subject: 3, mark: 20, coefficient: 1 },*/
     ]);
 
     console.log('Data inserted successfully.');
@@ -151,9 +269,10 @@ const populateDatabase = async () => {
   }
 };
 
-populateDatabase();
-
-const initializeDatabase = async () => {
+const startServer = async () => {
+  await syncDatabase();
+  await populateDatabase();
+  sequelize.sync();
   try {
     await sequelize.authenticate();
     console.log('Connection to the PostgreSQL database has been established successfully.');
@@ -162,7 +281,7 @@ const initializeDatabase = async () => {
   }
 };
 
-initializeDatabase();
+startServer();
 
 const app = express();
 

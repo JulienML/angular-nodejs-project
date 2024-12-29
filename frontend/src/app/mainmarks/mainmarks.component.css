@@ -1,56 +1,43 @@
-/* Center and style the container */
+/* Styling of the container */
 .container {
-  margin: 0 auto;
-  max-width: 800px;
+  margin: 20px auto; /* Centers the box and gives space around it */
+  max-width: 1300px; /* Maximum supported width, adapted to the grid */
   text-align: center;
   font-family: Arial, sans-serif;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 40px ; /* Spacing the containing */
+  border: 2px solid #ccc; /* Thick light grey bordure */
+  border-radius: 15px; /* rounded corners of the box */
+  background-color: #f4f7fb; /* little bright background colordouce */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* shadow of box */
 }
 
-/* Title styling */
+/* Styling of the main title */
 .container h1 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 10px;
+  color: #222; /* dark color */
+  font-size: 28px;
+  margin-bottom: 20px; /* spacing under the title */
+  font-weight: bold;
 }
 
-/* Subtitle styling */
+/* Styling of subtitle */
 .container p {
-  color: #555;
-  font-size: 16px;
-  margin-bottom: 20px;
+  color: #666; /* brighter color than the main titleclair */
+  font-size: 18px; /* lower font size than the main title */
+  margin-bottom: 30px; /* more space under the subtitle */
 }
 
-/* Grid container for proper alignment */
+/* Styling of Grid container  */
 .grid-container {
-  margin: 0 auto;
+  margin: 20px auto; /* space around the centered box */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 20px; /* Space around the grid */
+  width : 65%; /* managing the space given for the grid*/
+  max-width: 1400px;
+  background-color: #ffffff;
+  border-radius: 10px; /* rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
 }
 
-/* Style the ag-grid-angular component */
-.ag-theme-alpine {
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
-button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
