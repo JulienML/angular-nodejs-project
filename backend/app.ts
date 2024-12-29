@@ -27,7 +27,7 @@ const Student = sequelize.define('Student', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-})
+});
 
 const Subject = sequelize.define('Subject', {
   id: {
@@ -56,6 +56,7 @@ const Mark = sequelize.define('Mark', {
   },
   coefficient: {
     type: DataTypes.INTEGER,
+
     defaultValue: 1
   }
 });
@@ -178,7 +179,7 @@ const jsDocOptions = {
       version: '1.0.0',
     },
   },
-  apis: ['app.ts'],
+  apis: ['./app.ts'],
 };
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(jsDocOptions)));
@@ -250,7 +251,6 @@ app.get('/students', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'An error occurred while fetching students.' });
   }
 });
-
 
 app.post('/students', async (req: Request, res: Response) => {
   const student = await Student.create(req.body);
