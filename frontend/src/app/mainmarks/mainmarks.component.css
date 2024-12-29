@@ -1,56 +1,40 @@
-/* Center and style the container */
+/* container layout parameters */
 .container {
-  margin: 0 auto;
-  max-width: 620px;
+  margin: 20px auto; /* centers the box and gives space around it */
+  max-width: 1300px; /* maximum supported width, adapted to the grid */
   text-align: center;
   font-family: Arial, sans-serif;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 40px ; /* space inside of container around of content */
+  border: 2px solid #ccc; /* thick light grey border */
+  border-radius: 15px; /* rounded corners of the box */
+  background-color: #f4f7fb; /* bright background color */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* shadow of box */
 }
 
-/* Title styling */
+/* Main Title layout parameters */
 .container h1 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 10px;
+  color: #222; /* dark color */
+  font-size: 28px; /* size of text */
+  margin-bottom: 20px; /* spacing under the title */
+  font-weight: bold;
 }
 
-/* Subtitle styling */
+/* Subtitle layout parameters */
 .container p {
-  color: #555;
-  font-size: 16px;
-  margin-bottom: 10px;
+  color: #666; /* brighter color than the main title */
+  font-size: 18px; /* lower font size than the main title */
+  margin-bottom: 30px; /* more space under the subtitle */
 }
 
-/* Grid container for proper alignment */
 .grid-container {
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-
-/* Style the ag-grid-angular component */
-.ag-theme-alpine {
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-button:hover {
-  background-color: #0056b3;
+  margin: 20px auto; /* space around the centered box */
+  display: flex; /* enabling of Flexbox for alignment and spacing */
+  justify-content: center;/* center the content horizontally */
+  align-items: center; /* center the content vertically */
+  padding: 20px; /* space inside of container around of content */
+  width : 65%; /* managing the space given for the grid*/
+  max-width: 1400px; /* container's maximum width */
+  background-color: #ffffff; /* background color is white */
+  border-radius: 10px; /* rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
 }

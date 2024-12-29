@@ -1,65 +1,40 @@
-/* Center and style the container */
+/* container layout parameters */
 .container {
-  margin: 20px auto; /* Ajoute un espace autour de la boîte */
-  max-width: 1200px; /* Augmente la largeur maximale */
+  margin: 20px auto; /* centers the box and gives space around it */
+  max-width: 1300px; /* maximum supported width, adapted to the grid */
   text-align: center;
   font-family: Arial, sans-serif;
-  padding: 40px; /* Augmente le padding pour un contenu plus spacieux */
-  border: 2px solid #ccc; /* Bordure plus épaisse pour un effet visuel */
-  border-radius: 15px; /* Coins arrondis légèrement plus grands */
-  background-color: #f4f7fb; /* Couleur légèrement plus douce */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Ombre plus importante */
+  padding: 40px ; /* space inside of container around of content */
+  border: 2px solid #ccc; /* thick light grey border */
+  border-radius: 15px; /* rounded corners of the box */
+  background-color: #f4f7fb; /* bright background color */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* shadow of box */
 }
 
-/* Title styling */
+/* Main Title layout parameters */
 .container h1 {
-  color: #222; /* Couleur un peu plus sombre pour un contraste */
-  font-size: 28px; /* Augmente la taille de la police */
-  margin-bottom: 20px; /* Plus d'espace sous le titre */
+  color: #222; /* dark color */
+  font-size: 28px; /* size of text */
+  margin-bottom: 20px; /* spacing under the title */
   font-weight: bold;
 }
 
-/* Subtitle styling */
+/* Subtitle layout parameters */
 .container p {
-  color: #666; /* Texte légèrement plus clair */
-  font-size: 18px; /* Augmente la taille de la police */
-  margin-bottom: 30px; /* Plus d'espace sous le sous-titre */
+  color: #666; /* brighter color than the main title */
+  font-size: 18px; /* lower font size than the main title */
+  margin-bottom: 30px; /* more space under the subtitle */
 }
 
-/* Grid container for proper alignment */
+/* grid-container layout parameters  */
 .grid-container {
-  margin: 20px auto; /* Ajoute un espace vertical autour de la grille */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px; /* Espace autour de la grille */
-  background-color: #ffffff; /* Couleur de fond différente */
-  border-radius: 10px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
-}
-
-/* Style the ag-grid-angular component */
-.ag-theme-alpine {
-  border-radius: 8px; /* Coins arrondis pour la grille */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre pour la grille */
-}
-
-/* Button styling */
-button {
-  margin-top: 20px; /* Plus d'espace au-dessus des boutons */
-  padding: 12px 25px; /* Boutons plus grands */
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px; /* Coins arrondis pour les boutons */
-  cursor: pointer;
-  font-size: 16px; /* Texte des boutons plus grand */
-  font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px); /* Légère élévation au survol */
+  margin: 20px auto; /* space around the centered box */
+  display: flex; /* enabling of Flexbox for alignment and spacing */
+  justify-content: center; /* center the content horizontally */
+  align-items: center; /* center the content vertically */
+  padding: 20px; /* space inside of container around of content */
+  max-width: 1400px; /* container's maximum width */
+  background-color: #ffffff; /* background color is white */
+  border-radius: 10px; /* rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
 }

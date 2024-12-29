@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GradeService } from '../services/grade.service';
+import { GradeService } from '../Services/grade.service';
 
 @Component({
   selector: 'app-grade-config',
@@ -37,7 +37,7 @@ export class GradeConfigComponent implements OnInit {
       this.grades = data.map(grade => ({ ...grade, isEditing: false }));
     });
   }
-  
+
   // Add a new student
   // We call the grade.service.ts file to add a new student in the database
   // and then we load the data again to refresh the display below
