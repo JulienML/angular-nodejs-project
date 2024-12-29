@@ -69,20 +69,18 @@ Mark.belongsTo(Subject, { foreignKey: 'id_subject' });
 
 
 // Synchronizing the database
-sequelize.sync();
+const syncDatabase = async () => {
+  try {
+    await sequelize.sync({ force: true });
+    console.log('Database synchronized successfully.');
+  } catch (error) {
+    console.error('Error synchronizing the database:', error);
+  }
+};
 
 //Data seed
 const populateDatabase = async () => {
   try {
-    await sequelize
-      .sync({ force: true })
-      .then(() => {
-        console.log('Database synced successfully!');
-      })
-      .catch((error) => {
-        console.error('Error syncing database:', error);
-      });
-
     await Student.bulkCreate([
       { name: 'Ali' },
       { name: 'Adrien' },
@@ -113,6 +111,7 @@ const populateDatabase = async () => {
       { id_student: 3, id_subject: 1, mark: 12, coefficient: 3 },
       { id_student: 4, id_subject: 1, mark: 18, coefficient: 3 },
       { id_student: 5, id_subject: 1, mark: 16, coefficient: 3 },
+
       { id_student: 1, id_subject: 2, mark: 10, coefficient: 1 },
       { id_student: 2, id_subject: 2, mark: 13, coefficient: 1 },
       { id_student: 3, id_subject: 2, mark: 16, coefficient: 1 },
@@ -128,6 +127,7 @@ const populateDatabase = async () => {
       { id_student: 3, id_subject: 2, mark: 15, coefficient: 3 },
       { id_student: 4, id_subject: 2, mark: 18, coefficient: 3 },
       { id_student: 5, id_subject: 2, mark: 16, coefficient: 3 },
+      
       { id_student: 1, id_subject: 3, mark: 18, coefficient: 3 },
       { id_student: 2, id_subject: 3, mark: 17, coefficient: 3 },
       { id_student: 3, id_subject: 3, mark: 16, coefficient: 3 },
@@ -151,9 +151,10 @@ const populateDatabase = async () => {
   }
 };
 
-populateDatabase();
-
-const initializeDatabase = async () => {
+const startServer = async () => {
+  await syncDatabase();
+  await populateDatabase();
+  sequelize.sync();
   try {
     await sequelize.authenticate();
     console.log('Connection to the PostgreSQL database has been established successfully.');
@@ -162,7 +163,7 @@ const initializeDatabase = async () => {
   }
 };
 
-initializeDatabase();
+startServer();
 
 const app = express();
 
